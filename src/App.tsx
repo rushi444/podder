@@ -13,7 +13,7 @@ import {
 } from "@apollo/client";
 import config from "./aws-exports";
 
-import Hire from './assets/undraw_Hire.svg'
+import Hire from "./assets/undraw_Hire.svg";
 
 const { endpoint } = config.aws_cloud_logic_custom[0];
 
@@ -59,7 +59,10 @@ function App() {
 
 const client = new ApolloClient({
   cache: new InMemoryCache(),
-  uri: endpoint + "/graphql",
+  uri:
+    process.env.NODE_ENV === "development"
+      ? "http://localhost:4000/dev/graphql"
+      : endpoint + "/graphql",
 });
 
 const AppWithProvider = () => {
@@ -71,4 +74,3 @@ const AppWithProvider = () => {
 };
 
 export default AppWithProvider;
-

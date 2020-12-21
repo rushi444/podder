@@ -1,0 +1,30 @@
+service: apolloserver
+
+provider:
+  name: aws
+  runtime: nodejs12.x
+  apiGateway:
+    shouldStartNameWithService: true
+  environment:
+    NODE_ENV: "development"
+
+functions:
+  apolloserver:
+    handler: index.handler
+    events:
+      - http:
+          path: graphql
+          method: post
+          cors: true
+      - http:
+          path: graphql
+          method: get
+          cors: true
+
+plugins:
+  - serverless-offline
+
+custom:
+  serverless-offline:
+    useChildProcesses: true
+    httpPort: 4000
