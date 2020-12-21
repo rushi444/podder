@@ -3,9 +3,14 @@
   "version": "0.0.0",
   "scripts": {
     "dev": "vite",
-    "build": "tsc && vite build"
+    "build": "tsc && vite build",
+    "amplify:apolloserver": "cd amplify/backend/function/apolloserver/src && tsc"
   },
   "dependencies": {
+    "@apollo/client": "^3.3.6",
+    "apollo-server-lambda": "^2.19.0",
+    "aws-amplify": "^3.3.13",
+    "graphql": "^15.4.0",
     "react": "^17.0.0",
     "react-dom": "^17.0.0"
   },

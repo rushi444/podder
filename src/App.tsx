@@ -1,9 +1,30 @@
-import React, { useState } from 'react'
-import logo from './logo.svg'
-import './App.css'
+import React, { useState } from "react";
+import logo from "./logo.svg";
+import "./App.css";
+
+import {
+  ApolloClient,
+  ApolloProvider,
+  gql,
+  InMemoryCache,
+  useQuery,
+} from "@apollo/client";
+import config from "./aws-exports";
+
+const { endpoint } = config.aws_cloud_logic_custom[0];
+
+const query = gql`
+  query {
+    hello
+  }
+`;
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [count, setCount] = useState(0);
+  const { loading, error, data } = useQuery(query);
+
+  if (loading) return <h3>Loading...</h3>;
+  if (error) return <h3>{JSON.stringify(error)}</h3>;
 
   return (
     <div className="App">
@@ -11,7 +32,10 @@ function App() {
         <img src={logo} className="App-logo" alt="logo" />
         <p>Hello Vite + React!</p>
         <p>
-          <button onClick={() => setCount(count => count + 1)}>count is: {count}</button>
+          <h3>Data: {data}</h3>
+          <button onClick={() => setCount((count) => count + 1)}>
+            count is: {count}
+          </button>
         </p>
         <p>
           Edit <code>App.tsx</code> and save to test HMR updates.
@@ -26,7 +50,21 @@ function App() {
         </a>
       </header>
     </div>
-  )
+  );
 }
 
-export default App
+const client = new ApolloClient({
+  cache: new InMemoryCache(),
+  uri: endpoint + "/graphql",
+});
+
+const AppWithProvider = () => {
+  return (
+    <ApolloProvider client={client}>
+      <App />
+    </ApolloProvider>
+  );
+};
+
+export default AppWithProvider;
+

@@ -1,12 +1,12 @@
 {
     "paths": [
         {
-            "name": "/graphql",
+            "name": "/",
             "lambdaFunction": "apolloserver",
             "privacy": {
                 "open": true
             },
-            "policyResourceName": "/graphql"
+            "policyResourceName": "/"
         }
     ],
     "resourceName": "apolloapi",
