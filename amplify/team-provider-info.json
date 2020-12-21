@@ -1,0 +1,15 @@
+{
+  "dev": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-podderapp-dev-205853-authRole",
+      "UnauthRoleArn": "arn:aws:iam::148716834237:role/amplify-podderapp-dev-205853-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::148716834237:role/amplify-podderapp-dev-205853-authRole",
+      "Region": "us-east-1",
+      "DeploymentBucketName": "amplify-podderapp-dev-205853-deployment",
+      "UnauthRoleName": "amplify-podderapp-dev-205853-unauthRole",
+      "StackName": "amplify-podderapp-dev-205853",
+      "StackId": "arn:aws:cloudformation:us-east-1:148716834237:stack/amplify-podderapp-dev-205853/3b6e2580-4349-11eb-8071-0af8d25392ed",
+      "AmplifyAppId": "d16k9fe2cdtpt2"
+    }
+  }
+}
