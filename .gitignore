@@ -4,6 +4,7 @@ dist
 dist-ssr
 *.local
 dist
+.env
 
 #amplify
 amplify/\#current-cloud-backend

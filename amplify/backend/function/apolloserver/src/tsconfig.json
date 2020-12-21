@@ -3,7 +3,6 @@
       "target": "es5",
       "noImplicitAny": false,
       "allowJs": true,
-      "types": ["node"],
       "esModuleInterop": true
     },
     "include": ["."],

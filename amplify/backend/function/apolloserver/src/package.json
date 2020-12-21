@@ -5,10 +5,20 @@
   "main": "index.js",
   "license": "Apache-2.0",
   "scripts": {
-    "offline": "sls offline"
+    "generate:prisma": "prisma generate",
+    "generate:nexus": "ts-node --transpile-only api/schema",
+    "db:save": "yarn prisma migrate dev --create-only --preview-feature",
+    "db:migrate": "yarn prisma migrate dev --preview-feature"
   },
   "dependencies": {
+    "@prisma/client": "^2.13.1",
     "apollo-server-lambda": "^2.19.0",
-    "graphql": "^15.4.0"
+    "graphql": "^15.4.0",
+    "nexus": "^1.0.0",
+    "nexus-plugin-prisma": "^0.27.0"
+  },
+  "devDependencies": {
+    "@prisma/cli": "^2.13.1",
+    "ts-node": "^9.1.1"
   }
 }

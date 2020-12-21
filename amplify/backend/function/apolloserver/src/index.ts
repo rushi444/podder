@@ -1,32 +1,22 @@
-import { ApolloServer, gql } from "apollo-server-lambda";
+import { ApolloServer } from 'apollo-server-lambda'
 
-const typeDefs = gql`
-  type Query {
-    hello: String
-  }
-`;
-
-const resolvers = {
-  Query: {
-    hello: () => "hello from lambda",
-  },
-};
+import { schema } from './api/schema'
+import { createContext } from './api/context'
 
 const server = new ApolloServer({
-  typeDefs,
-  resolvers,
+  schema,
   context: ({ event, context }) => ({
     headers: event.headers,
     functionName: context.functionName,
     event,
-    context,
+    ...createContext(),
   }),
   introspection: true,
-});
+})
 
 export const handler = server.createHandler({
   cors: {
-    origin: "*",
+    origin: '*',
     credentials: true,
   },
-});
+})
