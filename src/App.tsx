@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import logo from "./logo.svg";
 import "./App.css";
 
+// Theme main: green: #00BFA6
+
 import {
   ApolloClient,
   ApolloProvider,
@@ -10,6 +12,8 @@ import {
   useQuery,
 } from "@apollo/client";
 import config from "./aws-exports";
+
+import Hire from './assets/undraw_Hire.svg'
 
 const { endpoint } = config.aws_cloud_logic_custom[0];
 
@@ -36,6 +40,7 @@ function App() {
             count is: {count}
           </button>
         </p>
+        <img src={Hire} />
         <p>
           Edit <code>App.tsx</code> and save to test HMR updates.
         </p>
