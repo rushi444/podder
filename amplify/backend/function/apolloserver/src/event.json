@@ -1,5 +1,9 @@
 {
-  "key1": "value1",
-  "key2": "value2",
-  "key3": "value3"
+  "httpMethod": "POST",
+  "path": "/graphql",
+  "resource": "/graphql",
+  "headers": {
+    "Content-Type": "application/json"
+  },
+  "body": "{\"query\":\"query {\\n    hello\\n}\",\"variables\":{}}"
 }
