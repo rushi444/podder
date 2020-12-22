@@ -1,4 +1,23 @@
 "use strict";
+var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    Object.defineProperty(o, k2, { enumerable: true, get: function() { return m[k]; } });
+}) : (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    o[k2] = m[k];
+}));
+var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (function(o, v) {
+    Object.defineProperty(o, "default", { enumerable: true, value: v });
+}) : function(o, v) {
+    o["default"] = v;
+});
+var __importStar = (this && this.__importStar) || function (mod) {
+    if (mod && mod.__esModule) return mod;
+    var result = {};
+    if (mod != null) for (var k in mod) if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
+    __setModuleDefault(result, mod);
+    return result;
+};
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
     function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
     return new (P || (P = Promise))(function (resolve, reject) {
@@ -38,36 +57,92 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.User = void 0;
 var nexus_1 = require("nexus");
+var argon2 = __importStar(require("argon2"));
+var jwt = __importStar(require("jsonwebtoken"));
 var UserModel = nexus_1.objectType({
     name: 'User',
     definition: function (t) {
         t.model.id();
         t.model.name();
         t.model.email();
+        // t.model.profile()
+    },
+});
+var createUserInput = nexus_1.inputObjectType({
+    name: 'createUserInput',
+    definition: function (t) {
+        t.nonNull.string('name');
+        t.nonNull.string('email');
+        t.nonNull.string('password');
     },
 });
 var createUser = nexus_1.mutationField('createUser', {
     type: 'User',
-    args: {
-        name: nexus_1.stringArg(),
-        email: nexus_1.nonNull(nexus_1.stringArg()),
-    },
+    args: { input: createUserInput },
     resolve: function (parent, _a, _b, info) {
-        var name = _a.name, email = _a.email;
+        var input = _a.input;
         var prisma = _b.prisma;
         return __awaiter(void 0, void 0, void 0, function () {
-            var user;
+            var name, email, password, hashedPassword, newUser;
             return __generator(this, function (_c) {
                 switch (_c.label) {
-                    case 0: return [4 /*yield*/, prisma.user.create({
-                            data: {
-                                name: name,
-                                email: email,
-                            },
-                        })];
+                    case 0:
+                        name = input.name, email = input.email, password = input.password;
+                        return [4 /*yield*/, argon2.hash(password)];
+                    case 1:
+                        hashedPassword = _c.sent();
+                        return [4 /*yield*/, prisma.user.create({
+                                data: {
+                                    name: name,
+                                    email: email,
+                                    password: hashedPassword,
+                                },
+                            })];
+                    case 2:
+                        newUser = _c.sent();
+                        return [2 /*return*/, newUser];
+                }
+            });
+        });
+    },
+});
+var loginInput = nexus_1.inputObjectType({
+    name: 'loginInput',
+    definition: function (t) {
+        t.nonNull.string('email');
+        t.nonNull.string('password');
+    },
+});
+var login = nexus_1.mutationField('login', {
+    type: 'AuthPayload',
+    args: { input: loginInput },
+    resolve: function (parent, _a, _b, info) {
+        var input = _a.input;
+        var prisma = _b.prisma;
+        return __awaiter(void 0, void 0, void 0, function () {
+            var email, password, user, passwordMatch, signature, token;
+            return __generator(this, function (_c) {
+                switch (_c.label) {
+                    case 0:
+                        email = input.email, password = input.password;
+                        return [4 /*yield*/, prisma.user.findUnique({
+                                where: {
+                                    email: email,
+                                },
+                            })];
                     case 1:
                         user = _c.sent();
-                        return [2 /*return*/, user];
+                        if (!user)
+                            throw new Error('User does not exist');
+                        passwordMatch = argon2.verify(password, user.password);
+                        if (!passwordMatch)
+                            throw new Error('Incorrect password');
+                        signature = {
+                            userId: user.id,
+                            email: user.email,
+                        };
+                        token = jwt.sign(signature, '123456789', { expiresIn: '30d' });
+                        return [2 /*return*/, { token: token, user: user }];
                 }
             });
         });
@@ -76,4 +151,5 @@ var createUser = nexus_1.mutationField('createUser', {
 exports.User = {
     UserModel: UserModel,
     createUser: createUser,
+    login: login,
 };

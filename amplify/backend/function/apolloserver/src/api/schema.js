@@ -28,6 +28,7 @@ var nexusPrisma = schema_1.nexusSchemaPrisma({
     experimentalCRUD: true,
     paginationStrategy: 'prisma',
     prismaClient: function (ctx) { return ctx.prisma; },
+    shouldGenerateArtifacts: true
 });
 exports.schema = nexus_1.makeSchema({
     types: [allTypes],

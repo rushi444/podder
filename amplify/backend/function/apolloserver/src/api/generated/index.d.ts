@@ -19,6 +19,15 @@ declare global {
 }
 
 export interface NexusGenInputs {
+  createUserInput: { // input type
+    email: string; // String!
+    name: string; // String!
+    password: string; // String!
+  }
+  loginInput: { // input type
+    email: string; // String!
+    password: string; // String!
+  }
 }
 
 export interface NexusGenEnums {
@@ -33,6 +42,10 @@ export interface NexusGenScalars {
 }
 
 export interface NexusGenObjects {
+  AuthPayload: { // root type
+    token?: string | null; // String
+    user?: NexusGenRootTypes['User'] | null; // User
+  }
   Mutation: {};
   Query: {};
   User: prisma.User;
@@ -49,29 +62,39 @@ export type NexusGenRootTypes = NexusGenObjects
 export type NexusGenAllTypes = NexusGenRootTypes & NexusGenScalars
 
 export interface NexusGenFieldTypes {
+  AuthPayload: { // field return type
+    token: string | null; // String
+    user: NexusGenRootTypes['User'] | null; // User
+  }
   Mutation: { // field return type
     createUser: NexusGenRootTypes['User'] | null; // User
+    login: NexusGenRootTypes['AuthPayload'] | null; // AuthPayload
   }
   Query: { // field return type
     ok: boolean; // Boolean!
   }
   User: { // field return type
     email: string; // String!
-    id: number; // Int!
-    name: string | null; // String
+    id: string; // String!
+    name: string; // String!
   }
 }
 
 export interface NexusGenFieldTypeNames {
+  AuthPayload: { // field return type name
+    token: 'String'
+    user: 'User'
+  }
   Mutation: { // field return type name
     createUser: 'User'
+    login: 'AuthPayload'
   }
   Query: { // field return type name
     ok: 'Boolean'
   }
   User: { // field return type name
     email: 'String'
-    id: 'Int'
+    id: 'String'
     name: 'String'
   }
 }
@@ -79,8 +102,10 @@ export interface NexusGenFieldTypeNames {
 export interface NexusGenArgTypes {
   Mutation: {
     createUser: { // args
-      email: string; // String!
-      name?: string | null; // String
+      input?: NexusGenInputs['createUserInput'] | null; // createUserInput
+    }
+    login: { // args
+      input?: NexusGenInputs['loginInput'] | null; // loginInput
     }
   }
 }
@@ -93,7 +118,7 @@ export interface NexusGenTypeInterfaces {
 
 export type NexusGenObjectNames = keyof NexusGenObjects;
 
-export type NexusGenInputNames = never;
+export type NexusGenInputNames = keyof NexusGenInputs;
 
 export type NexusGenEnumNames = never;
 

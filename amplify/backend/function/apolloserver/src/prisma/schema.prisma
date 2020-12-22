@@ -12,7 +12,43 @@ generator client {
 }
 
 model User {
-  id    Int     @id @default(autoincrement())
-  email String  @unique
-  name  String?
+  id       String @id @default(uuid())
+  email    String @unique
+  password String
+  name     String
+
+  profile Profile?
+  podcast Podcast[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+}
+
+model Profile {
+  id            String    @id @default(uuid())
+  bio           String?
+  likedPodcasts Podcast[]
+
+  user   User   @relation(fields: [userId])
+  userId String @unique
+}
+
+model Podcast {
+  id   String  @id @default(uuid())
+  name String  @unique
+  info String?
+
+  owner  User   @relation(fields: [userId], references: [id])
+  userId String
+
+  categories Category[]
+  likedBy    Profile[]
+}
+
+model Category {
+  id   String @id @default(uuid())
+  name String @unique
+
+  podcasts Podcast[]
 }
