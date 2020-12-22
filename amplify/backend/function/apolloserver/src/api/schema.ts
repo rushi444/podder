@@ -8,7 +8,7 @@ const nexusPrisma = nexusSchemaPrisma({
   experimentalCRUD: true,
   paginationStrategy: 'prisma',
   prismaClient: (ctx: Context) => ctx.prisma,
-  shouldGenerateArtifacts: true
+  shouldGenerateArtifacts: false
 })
 
 export const schema = makeSchema({
