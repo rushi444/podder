@@ -19,4 +19,4 @@ export const handler = server.createHandler({
     origin: '*',
     credentials: true,
   },
-})
+})   
