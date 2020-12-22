@@ -19,7 +19,7 @@ var server = new apollo_server_lambda_1.ApolloServer({
     schema: schema_1.schema,
     context: function (_a) {
         var event = _a.event, context = _a.context;
-        return (__assign({ headers: event.headers, functionName: context.functionName, event: event }, context_1.createContext()));
+        return (__assign({ headers: event.headers, functionName: context.functionName, event: event }, context_1.createContext(context, event.headers)));
     },
     introspection: true,
 });

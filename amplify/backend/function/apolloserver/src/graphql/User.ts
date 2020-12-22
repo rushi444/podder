@@ -1,8 +1,8 @@
 import { inputObjectType, mutationField, objectType } from 'nexus'
-import * as argon2 from 'argon2'
-import * as jwt from 'jsonwebtoken'
+import { hash, verify } from 'argon2'
+import { sign } from 'jsonwebtoken'
 
-const UserModel = objectType({
+const User = objectType({
   name: 'User',
   definition: t => {
     t.model.id()
@@ -27,7 +27,7 @@ const createUser = mutationField('createUser', {
   resolve: async (parent, { input }, { prisma }, info) => {
     const { name, email, password } = input
 
-    const hashedPassword = await argon2.hash(password)
+    const hashedPassword = await hash(password)
 
     const newUser = await prisma.user.create({
       data: {
@@ -62,7 +62,7 @@ const login = mutationField('login', {
 
     if (!user) throw new Error('User does not exist')
 
-    const passwordMatch = argon2.verify(password, user.password)
+    const passwordMatch = verify(password, user.password)
 
     if (!passwordMatch) throw new Error('Incorrect password')
 
@@ -71,14 +71,14 @@ const login = mutationField('login', {
       email: user.email,
     }
 
-    const token = jwt.sign(signature, '123456789', { expiresIn: '30d' })
+    const token = sign(signature, '123456789', { expiresIn: '30d' })
 
     return { token, user }
   },
 })
 
-export const User = {
-  UserModel,
+export const UserTypes = {
+  User,
   createUser,
   login,
 }

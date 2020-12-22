@@ -19,6 +19,9 @@ declare global {
 }
 
 export interface NexusGenInputs {
+  createProfileInput: { // input type
+    bio?: string | null; // String
+  }
   createUserInput: { // input type
     email: string; // String!
     name: string; // String!
@@ -47,6 +50,7 @@ export interface NexusGenObjects {
     user?: NexusGenRootTypes['User'] | null; // User
   }
   Mutation: {};
+  Profile: prisma.Profile;
   Query: {};
   User: prisma.User;
 }
@@ -69,6 +73,12 @@ export interface NexusGenFieldTypes {
   Mutation: { // field return type
     createUser: NexusGenRootTypes['User'] | null; // User
     login: NexusGenRootTypes['AuthPayload'] | null; // AuthPayload
+    upsertProfile: NexusGenRootTypes['Profile'] | null; // Profile
+  }
+  Profile: { // field return type
+    bio: string | null; // String
+    id: string; // String!
+    user: NexusGenRootTypes['User']; // User!
   }
   Query: { // field return type
     ok: boolean; // Boolean!
@@ -88,6 +98,12 @@ export interface NexusGenFieldTypeNames {
   Mutation: { // field return type name
     createUser: 'User'
     login: 'AuthPayload'
+    upsertProfile: 'Profile'
+  }
+  Profile: { // field return type name
+    bio: 'String'
+    id: 'String'
+    user: 'User'
   }
   Query: { // field return type name
     ok: 'Boolean'
@@ -106,6 +122,9 @@ export interface NexusGenArgTypes {
     }
     login: { // args
       input?: NexusGenInputs['loginInput'] | null; // loginInput
+    }
+    upsertProfile: { // args
+      input?: NexusGenInputs['createProfileInput'] | null; // createProfileInput
     }
   }
 }

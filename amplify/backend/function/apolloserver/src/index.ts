@@ -9,7 +9,7 @@ const server = new ApolloServer({
     headers: event.headers,
     functionName: context.functionName,
     event,
-    ...createContext(),
+    ...createContext(context, event.headers),
   }),
   introspection: true,
 })

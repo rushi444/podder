@@ -36,101 +36,49 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     }
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.UserTypes = void 0;
+exports.ProfileTypes = void 0;
 var nexus_1 = require("nexus");
-var argon2_1 = require("argon2");
-var jsonwebtoken_1 = require("jsonwebtoken");
-var User = nexus_1.objectType({
-    name: 'User',
+var Profile = nexus_1.objectType({
+    name: 'Profile',
     definition: function (t) {
         t.model.id();
-        t.model.name();
-        t.model.email();
-        // t.model.profile()
+        t.model.bio();
+        t.model.user();
     },
 });
-var createUserInput = nexus_1.inputObjectType({
-    name: 'createUserInput',
+var createProfileInput = nexus_1.inputObjectType({
+    name: 'createProfileInput',
     definition: function (t) {
-        t.nonNull.string('name');
-        t.nonNull.string('email');
-        t.nonNull.string('password');
+        t.string('bio');
     },
 });
-var createUser = nexus_1.mutationField('createUser', {
-    type: 'User',
-    args: { input: createUserInput },
+var upsertProfile = nexus_1.mutationField('upsertProfile', {
+    type: Profile,
+    args: { input: createProfileInput },
     resolve: function (parent, _a, _b, info) {
         var input = _a.input;
-        var prisma = _b.prisma;
+        var prisma = _b.prisma, user = _b.user;
         return __awaiter(void 0, void 0, void 0, function () {
-            var name, email, password, hashedPassword, newUser;
+            var bio, userId, profile;
             return __generator(this, function (_c) {
                 switch (_c.label) {
                     case 0:
-                        name = input.name, email = input.email, password = input.password;
-                        return [4 /*yield*/, argon2_1.hash(password)];
-                    case 1:
-                        hashedPassword = _c.sent();
-                        return [4 /*yield*/, prisma.user.create({
-                                data: {
-                                    name: name,
-                                    email: email,
-                                    password: hashedPassword,
-                                },
+                        bio = input.bio;
+                        userId = user.userId;
+                        return [4 /*yield*/, prisma.profile.upsert({
+                                where: { userId: userId },
+                                update: { bio: bio },
+                                create: { bio: bio, user: { connect: { id: userId } } },
                             })];
-                    case 2:
-                        newUser = _c.sent();
-                        return [2 /*return*/, newUser];
+                    case 1:
+                        profile = _c.sent();
+                        return [2 /*return*/, profile];
                 }
             });
         });
     },
 });
-var loginInput = nexus_1.inputObjectType({
-    name: 'loginInput',
-    definition: function (t) {
-        t.nonNull.string('email');
-        t.nonNull.string('password');
-    },
-});
-var login = nexus_1.mutationField('login', {
-    type: 'AuthPayload',
-    args: { input: loginInput },
-    resolve: function (parent, _a, _b, info) {
-        var input = _a.input;
-        var prisma = _b.prisma;
-        return __awaiter(void 0, void 0, void 0, function () {
-            var email, password, user, passwordMatch, signature, token;
-            return __generator(this, function (_c) {
-                switch (_c.label) {
-                    case 0:
-                        email = input.email, password = input.password;
-                        return [4 /*yield*/, prisma.user.findUnique({
-                                where: {
-                                    email: email,
-                                },
-                            })];
-                    case 1:
-                        user = _c.sent();
-                        if (!user)
-                            throw new Error('User does not exist');
-                        passwordMatch = argon2_1.verify(password, user.password);
-                        if (!passwordMatch)
-                            throw new Error('Incorrect password');
-                        signature = {
-                            userId: user.id,
-                            email: user.email,
-                        };
-                        token = jsonwebtoken_1.sign(signature, '123456789', { expiresIn: '30d' });
-                        return [2 /*return*/, { token: token, user: user }];
-                }
-            });
-        });
-    },
-});
-exports.UserTypes = {
-    User: User,
-    createUser: createUser,
-    login: login,
+exports.ProfileTypes = {
+    Profile: Profile,
+    upsertProfile: upsertProfile,
 };
