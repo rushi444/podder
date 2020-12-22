@@ -1,6 +1,5 @@
 import React, { useState } from 'react'
 
-
 import { gql, useQuery } from '@apollo/client'
 
 import Hire from '../assets/undraw_Hire.svg'
