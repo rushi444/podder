@@ -6,7 +6,7 @@
     "dev": "vite",
     "build": "tsc && vite build",
     "offline": "cd amplify/backend/function/apolloserver/src && tsc && sls offline",
-    "build:apolloserver": "cd amplify/backend/function/apolloserver/src && tsc",
+    "amplify:apolloserver": "cd amplify/backend/function/apolloserver/src && tsc",
     "prettier": "prettier --write 'src/**/*.{ts,tsx,js,jsx}'",
     "pre-commit": "yarn build:apolloserver && yarn prettier"
   },
