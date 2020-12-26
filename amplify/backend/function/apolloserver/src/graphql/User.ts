@@ -18,6 +18,7 @@ const createUserInput = inputObjectType({
     t.nonNull.string('name')
     t.nonNull.string('email')
     t.nonNull.string('password')
+    t.nonNull.string('password2')
   },
 })
 
@@ -25,7 +26,9 @@ const createUser = mutationField('createUser', {
   type: 'User',
   args: { input: createUserInput },
   resolve: async (parent, { input }, { prisma }, info) => {
-    const { name, email, password } = input
+    const { name, email, password, password2 } = input
+
+    if (password !== password2) throw new Error('Passwords do not match')
 
     const hashedPassword = await hash(password)
 

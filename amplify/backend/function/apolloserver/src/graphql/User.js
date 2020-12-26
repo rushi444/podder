@@ -46,7 +46,7 @@ var User = nexus_1.objectType({
         t.model.id();
         t.model.name();
         t.model.email();
-        // t.model.profile()
+        t.model.profile();
     },
 });
 var createUserInput = nexus_1.inputObjectType({
@@ -55,6 +55,7 @@ var createUserInput = nexus_1.inputObjectType({
         t.nonNull.string('name');
         t.nonNull.string('email');
         t.nonNull.string('password');
+        t.nonNull.string('password2');
     },
 });
 var createUser = nexus_1.mutationField('createUser', {
@@ -64,11 +65,13 @@ var createUser = nexus_1.mutationField('createUser', {
         var input = _a.input;
         var prisma = _b.prisma;
         return __awaiter(void 0, void 0, void 0, function () {
-            var name, email, password, hashedPassword, newUser;
+            var name, email, password, password2, hashedPassword, newUser;
             return __generator(this, function (_c) {
                 switch (_c.label) {
                     case 0:
-                        name = input.name, email = input.email, password = input.password;
+                        name = input.name, email = input.email, password = input.password, password2 = input.password2;
+                        if (password !== password2)
+                            throw new Error('Passwords do not match');
                         return [4 /*yield*/, argon2_1.hash(password)];
                     case 1:
                         hashedPassword = _c.sent();
