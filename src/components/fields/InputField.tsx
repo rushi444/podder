@@ -12,6 +12,7 @@ import { useMetaError } from '../../hooks/useMetaError'
 
 type Props = {
   name: string
+  label: string
   control: Control
   rules?: any
   ref?: any
@@ -19,13 +20,13 @@ type Props = {
 }
 
 export const InputField = (props: Props) => {
-  const { type = 'text' } = props
+  const { type = 'text', label } = props
   const { field, meta } = useController(props)
   const { errorMessage, hasError } = useMetaError(meta)
   return (
-    <Box>
+    <Box m='3% 0'>
       <FormControl isInvalid={hasError}>
-        <FormLabel>{props.name}</FormLabel>
+        <FormLabel>{label}</FormLabel>
         <Input {...field} type={type} />
         <FormErrorMessage>{errorMessage}</FormErrorMessage>
       </FormControl>
