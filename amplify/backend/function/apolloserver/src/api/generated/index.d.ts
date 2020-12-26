@@ -26,6 +26,7 @@ export interface NexusGenInputs {
     email: string; // String!
     name: string; // String!
     password: string; // String!
+    password2: string; // String!
   }
   loginInput: { // input type
     email: string; // String!
@@ -87,6 +88,7 @@ export interface NexusGenFieldTypes {
     email: string; // String!
     id: string; // String!
     name: string; // String!
+    profile: NexusGenRootTypes['Profile'] | null; // Profile
   }
 }
 
@@ -112,6 +114,7 @@ export interface NexusGenFieldTypeNames {
     email: 'String'
     id: 'String'
     name: 'String'
+    profile: 'Profile'
   }
 }
 
