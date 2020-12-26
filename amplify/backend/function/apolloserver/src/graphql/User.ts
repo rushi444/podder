@@ -65,7 +65,7 @@ const login = mutationField('login', {
 
     if (!user) throw new Error('User does not exist')
 
-    const passwordMatch = verify(password, user.password)
+    const passwordMatch = await verify(user.password, password)
 
     if (!passwordMatch) throw new Error('Incorrect password')
 

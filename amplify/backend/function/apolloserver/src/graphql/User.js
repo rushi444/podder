@@ -118,7 +118,9 @@ var login = nexus_1.mutationField('login', {
                         user = _c.sent();
                         if (!user)
                             throw new Error('User does not exist');
-                        passwordMatch = argon2_1.verify(password, user.password);
+                        return [4 /*yield*/, argon2_1.verify(user.password, password)];
+                    case 2:
+                        passwordMatch = _c.sent();
                         if (!passwordMatch)
                             throw new Error('Incorrect password');
                         signature = {
