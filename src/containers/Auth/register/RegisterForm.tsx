@@ -25,8 +25,6 @@ export const RegisterForm = () => {
     createUser({ variables: { input: formValues } })
   }
 
-  data && console.log(data)
-
   return (
     <Box height="100%" alignContent="center">
       <form onSubmit={handleSubmit(onSubmit)}>
