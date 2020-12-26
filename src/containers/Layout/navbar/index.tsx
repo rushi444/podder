@@ -1,6 +1,7 @@
 import React from 'react'
-import { Flex, Button, Box, Heading } from '@chakra-ui/react'
+import { Flex, Heading } from '@chakra-ui/react'
 import { Link } from 'react-router-dom'
+import { ButtonContainer } from './ButtonContainer'
 
 export const Navbar = () => {
   return (
@@ -18,15 +19,7 @@ export const Navbar = () => {
           <Link to="/">Podder</Link>
         </Heading>
       </Flex>
-
-      <Box>
-        <Button bg="transparent" border="1px" mr="1rem">
-          <Link to="/auth">Sign Up</Link>
-        </Button>
-        <Button bg="transparent" border="1px">
-          Sign In
-        </Button>
-      </Box>
+      <ButtonContainer />
     </Flex>
   )
 }
