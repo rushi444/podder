@@ -43,6 +43,7 @@ var Profile = nexus_1.objectType({
     definition: function (t) {
         t.model.id();
         t.model.bio();
+        t.model.profilePic();
         t.model.user();
     },
 });
@@ -50,6 +51,7 @@ var createProfileInput = nexus_1.inputObjectType({
     name: 'createProfileInput',
     definition: function (t) {
         t.string('bio');
+        t.string('profilePic');
     },
 });
 var upsertProfile = nexus_1.mutationField('upsertProfile', {
@@ -59,16 +61,16 @@ var upsertProfile = nexus_1.mutationField('upsertProfile', {
         var input = _a.input;
         var prisma = _b.prisma, user = _b.user;
         return __awaiter(void 0, void 0, void 0, function () {
-            var bio, userId, profile;
+            var bio, profilePic, userId, profile;
             return __generator(this, function (_c) {
                 switch (_c.label) {
                     case 0:
-                        bio = input.bio;
+                        bio = input.bio, profilePic = input.profilePic;
                         userId = user.userId;
                         return [4 /*yield*/, prisma.profile.upsert({
                                 where: { userId: userId },
-                                update: { bio: bio },
-                                create: { bio: bio, user: { connect: { id: userId } } },
+                                update: { bio: bio, profilePic: profilePic },
+                                create: { bio: bio, profilePic: profilePic, user: { connect: { id: userId } } },
                             })];
                     case 1:
                         profile = _c.sent();

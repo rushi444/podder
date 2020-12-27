@@ -21,6 +21,7 @@ declare global {
 export interface NexusGenInputs {
   createProfileInput: { // input type
     bio?: string | null; // String
+    profilePic?: string | null; // String
   }
   createUserInput: { // input type
     email: string; // String!
@@ -79,6 +80,7 @@ export interface NexusGenFieldTypes {
   Profile: { // field return type
     bio: string | null; // String
     id: string; // String!
+    profilePic: string; // String!
     user: NexusGenRootTypes['User']; // User!
   }
   Query: { // field return type
@@ -105,6 +107,7 @@ export interface NexusGenFieldTypeNames {
   Profile: { // field return type name
     bio: 'String'
     id: 'String'
+    profilePic: 'String'
     user: 'User'
   }
   Query: { // field return type name

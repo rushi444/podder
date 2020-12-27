@@ -9,6 +9,7 @@ type AuthPayload {
 
 input createProfileInput {
   bio: String
+  profilePic: String
 }
 
 input createUserInput {
@@ -32,6 +33,7 @@ type Mutation {
 type Profile {
   bio: String
   id: String!
+  profilePic: String!
   user: User!
 }
 

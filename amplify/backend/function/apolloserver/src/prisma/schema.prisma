@@ -29,6 +29,7 @@ model Profile {
   id            String    @id @default(uuid())
   bio           String?
   likedPodcasts Podcast[]
+  profilePic    String    @default("https://icon-library.com/images/default-user-icon/default-user-icon-4.jpg")
 
   user   User   @relation(fields: [userId])
   userId String @unique
