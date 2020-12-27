@@ -3,7 +3,10 @@ import type { UserConfig } from 'vite'
 
 const config: UserConfig = {
   jsx: 'react',
-  plugins: [reactPlugin]
+  plugins: [reactPlugin],
+  optimizeDeps: {
+    include: ['fast-json-stable-stringify/index.js', 'zen-observable/index.js']
+  }
 }
 
 export default config
