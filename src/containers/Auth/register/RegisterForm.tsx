@@ -2,6 +2,7 @@ import React from 'react'
 import { Box, Button } from '@chakra-ui/react'
 import { useForm } from 'react-hook-form'
 import { useMutation } from '@apollo/client'
+import { useHistory } from 'react-router-dom'
 
 import { InputField } from '../../../components/fields/InputField'
 import {
@@ -12,12 +13,16 @@ import {
 import { CREATE_USER } from '../../../graphql/mutations'
 
 export const RegisterForm = () => {
+  const history = useHistory()
+
   const { handleSubmit, control, watch } = useForm({
     mode: 'onChange',
     defaultValues: registerDefaultValues,
   })
 
-  const [createUser, { data, loading }] = useMutation(CREATE_USER)
+  const [createUser, { loading }] = useMutation(CREATE_USER, {
+    onCompleted: () => history.push('/onboard'),
+  })
 
   const pwd = watch('password')
 

@@ -22,3 +22,18 @@ export const LOGIN = gql`
     }
   }
 `
+
+export const UPSERT_PROFILE = gql`
+  mutation UpsertProfile($input: createProfileInput) {
+    upsertProfile(input: $input) {
+      id
+      bio
+      profilePic
+      user {
+        id
+        name
+        email
+      }
+    }
+  }
+`
