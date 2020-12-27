@@ -13,10 +13,13 @@ export const LoginForm = () => {
     defaultValues: loginDefaultValues,
   })
 
-  const [login, { data, loading }] = useMutation(LOGIN)
+  const [login, { data, loading }] = useMutation(LOGIN, {
+    onCompleted: data => {
+      localStorage.setItem('token', data.login.token)
+    },
+  })
 
   const onSubmit = (formValues: FormValues) => {
-    console.log(formValues)
     login({ variables: { input: formValues } })
   }
 

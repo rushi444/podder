@@ -1,7 +1,7 @@
 import React, { useCallback } from 'react'
 import { useDropzone } from 'react-dropzone'
 import { Box, FormLabel, Text } from '@chakra-ui/react'
-import axios from 'redaxios'
+import axios from 'axios'
 import styled from '@emotion/styled'
 
 type Props = {
