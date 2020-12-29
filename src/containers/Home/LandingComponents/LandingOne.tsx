@@ -15,7 +15,10 @@ export const LandingOne = () => {
       </Flex>
       <Flex w={{ base: '90%', md: '40%' }} justifyContent="center">
         <Box w={{ base: '90%', md: '70%' }} alignSelf="center">
-          <Heading mb="1.5rem">The simple way to find your next guest</Heading>
+          <Heading mb="1.5rem">
+            The <span style={{ color: 'teal' }}>simple</span> way to find your
+            next guest
+          </Heading>
           <p style={{ marginBottom: '1.5rem' }}>
             Discover knowledgable and engaged guest speakers to take your
             podcast to new lengths!

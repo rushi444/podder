@@ -7,6 +7,17 @@ type AuthPayload {
   user: User
 }
 
+type Category {
+  id: String!
+  name: String!
+  podcasts(cursor: PodcastWhereUniqueInput, skip: Int, take: Int): [Podcast!]!
+}
+
+input CategoryWhereUniqueInput {
+  id: String
+  name: String
+}
+
 input createProfileInput {
   bio: String
   profilePic: String
@@ -28,6 +39,21 @@ type Mutation {
   createUser(input: createUserInput): User
   login(input: loginInput): AuthPayload
   upsertProfile(input: createProfileInput): Profile
+}
+
+type Podcast {
+  categories(cursor: CategoryWhereUniqueInput, skip: Int, take: Int): [Category!]!
+  id: String!
+  imageUrl: String
+  info: String
+  name: String!
+  owner: User!
+  podcastLink: String!
+}
+
+input PodcastWhereUniqueInput {
+  id: String
+  name: String
 }
 
 type Profile {

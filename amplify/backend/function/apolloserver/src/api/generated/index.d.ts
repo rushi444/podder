@@ -19,6 +19,14 @@ declare global {
 }
 
 export interface NexusGenInputs {
+  CategoryWhereUniqueInput: { // input type
+    id?: string | null; // String
+    name?: string | null; // String
+  }
+  PodcastWhereUniqueInput: { // input type
+    id?: string | null; // String
+    name?: string | null; // String
+  }
   createProfileInput: { // input type
     bio?: string | null; // String
     profilePic?: string | null; // String
@@ -51,7 +59,9 @@ export interface NexusGenObjects {
     token?: string | null; // String
     user?: NexusGenRootTypes['User'] | null; // User
   }
+  Category: prisma.Category;
   Mutation: {};
+  Podcast: prisma.Podcast;
   Profile: prisma.Profile;
   Query: {};
   User: prisma.User;
@@ -72,10 +82,24 @@ export interface NexusGenFieldTypes {
     token: string | null; // String
     user: NexusGenRootTypes['User'] | null; // User
   }
+  Category: { // field return type
+    id: string; // String!
+    name: string; // String!
+    podcasts: NexusGenRootTypes['Podcast'][]; // [Podcast!]!
+  }
   Mutation: { // field return type
     createUser: NexusGenRootTypes['User'] | null; // User
     login: NexusGenRootTypes['AuthPayload'] | null; // AuthPayload
     upsertProfile: NexusGenRootTypes['Profile'] | null; // Profile
+  }
+  Podcast: { // field return type
+    categories: NexusGenRootTypes['Category'][]; // [Category!]!
+    id: string; // String!
+    imageUrl: string | null; // String
+    info: string | null; // String
+    name: string; // String!
+    owner: NexusGenRootTypes['User']; // User!
+    podcastLink: string; // String!
   }
   Profile: { // field return type
     bio: string | null; // String
@@ -99,10 +123,24 @@ export interface NexusGenFieldTypeNames {
     token: 'String'
     user: 'User'
   }
+  Category: { // field return type name
+    id: 'String'
+    name: 'String'
+    podcasts: 'Podcast'
+  }
   Mutation: { // field return type name
     createUser: 'User'
     login: 'AuthPayload'
     upsertProfile: 'Profile'
+  }
+  Podcast: { // field return type name
+    categories: 'Category'
+    id: 'String'
+    imageUrl: 'String'
+    info: 'String'
+    name: 'String'
+    owner: 'User'
+    podcastLink: 'String'
   }
   Profile: { // field return type name
     bio: 'String'
@@ -122,6 +160,13 @@ export interface NexusGenFieldTypeNames {
 }
 
 export interface NexusGenArgTypes {
+  Category: {
+    podcasts: { // args
+      cursor?: NexusGenInputs['PodcastWhereUniqueInput'] | null; // PodcastWhereUniqueInput
+      skip?: number | null; // Int
+      take?: number | null; // Int
+    }
+  }
   Mutation: {
     createUser: { // args
       input?: NexusGenInputs['createUserInput'] | null; // createUserInput
@@ -131,6 +176,13 @@ export interface NexusGenArgTypes {
     }
     upsertProfile: { // args
       input?: NexusGenInputs['createProfileInput'] | null; // createProfileInput
+    }
+  }
+  Podcast: {
+    categories: { // args
+      cursor?: NexusGenInputs['CategoryWhereUniqueInput'] | null; // CategoryWhereUniqueInput
+      skip?: number | null; // Int
+      take?: number | null; // Int
     }
   }
 }

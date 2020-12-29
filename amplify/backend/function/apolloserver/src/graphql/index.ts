@@ -1,3 +1,5 @@
 export { UserTypes } from './User'
 export { AuthPayload } from './AuthPayload'
 export { ProfileTypes } from './Profile'
+export { PodcastTypes } from './Podcast'
+export { CategoryTypes } from './Category'
