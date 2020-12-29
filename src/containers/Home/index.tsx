@@ -1,6 +1,7 @@
 import { Box } from '@chakra-ui/react'
 import React from 'react'
 import { LandingOne } from './LandingComponents/LandingOne'
+import { LandingTwo } from './LandingComponents/LandingTwo'
 import { HomeContainer } from './styles'
 
 export const Home = () => {
@@ -11,7 +12,7 @@ export const Home = () => {
         mt={{ base: '5%', md: '10%', lg: '5%' }}
       >
         <LandingOne />
-        Home
+        <LandingTwo />
       </Box>
     </HomeContainer>
   )
