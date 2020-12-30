@@ -27,6 +27,12 @@ export interface NexusGenInputs {
     id?: string | null; // String
     name?: string | null; // String
   }
+  createPodcastInput: { // input type
+    imageUrl?: string | null; // String
+    info?: string | null; // String
+    name: string; // String!
+    podcastLink: string; // String!
+  }
   createProfileInput: { // input type
     bio?: string | null; // String
     profilePic?: string | null; // String

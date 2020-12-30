@@ -18,6 +18,13 @@ input CategoryWhereUniqueInput {
   name: String
 }
 
+input createPodcastInput {
+  imageUrl: String
+  info: String
+  name: String!
+  podcastLink: String!
+}
+
 input createProfileInput {
   bio: String
   profilePic: String
