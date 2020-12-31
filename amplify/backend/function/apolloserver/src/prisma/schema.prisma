@@ -23,6 +23,7 @@ model User {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
+  Post Post[]
 }
 
 model Profile {
@@ -47,6 +48,8 @@ model Podcast {
 
   categories Category[]
   likedBy    Profile[]
+  
+  Post       Post[]
 }
 
 model Category {
@@ -54,4 +57,15 @@ model Category {
   name String @unique
 
   podcasts Podcast[]
+}
+
+model Post {
+  id      String @id @default(uuid())
+  content String
+
+  author   User   @relation(fields: [authorId])
+  authorId String
+
+  podcast   Podcast @relation(fields: [podcastId])
+  podcastId String
 }
