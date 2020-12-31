@@ -19,6 +19,7 @@ input CategoryWhereUniqueInput {
 }
 
 input createPodcastInput {
+  categories: [String]
   imageUrl: String
   info: String
   name: String!
@@ -43,6 +44,7 @@ input loginInput {
 }
 
 type Mutation {
+  createPodcast(input: createPodcastInput): Podcast
   createUser(input: createUserInput): User
   login(input: loginInput): AuthPayload
   upsertProfile(input: createProfileInput): Profile

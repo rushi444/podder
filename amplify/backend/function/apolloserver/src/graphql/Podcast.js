@@ -1,4 +1,15 @@
 "use strict";
+var __assign = (this && this.__assign) || function () {
+    __assign = Object.assign || function(t) {
+        for (var s, i = 1, n = arguments.length; i < n; i++) {
+            s = arguments[i];
+            for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p))
+                t[p] = s[p];
+        }
+        return t;
+    };
+    return __assign.apply(this, arguments);
+};
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
     function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
     return new (P || (P = Promise))(function (resolve, reject) {
@@ -35,6 +46,17 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
         if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
     }
 };
+var __rest = (this && this.__rest) || function (s, e) {
+    var t = {};
+    for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p) && e.indexOf(p) < 0)
+        t[p] = s[p];
+    if (s != null && typeof Object.getOwnPropertySymbols === "function")
+        for (var i = 0, p = Object.getOwnPropertySymbols(s); i < p.length; i++) {
+            if (e.indexOf(p[i]) < 0 && Object.prototype.propertyIsEnumerable.call(s, p[i]))
+                t[p[i]] = s[p[i]];
+        }
+    return t;
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.PodcastTypes = void 0;
 var nexus_1 = require("nexus");
@@ -57,6 +79,7 @@ var createPodcastInput = nexus_1.inputObjectType({
         t.nonNull.string('podcastLink');
         t.string('info');
         t.string('imageUrl');
+        t.list.string('categories');
     },
 });
 var createPodcast = nexus_1.mutationField('createPodcast', {
@@ -66,12 +89,29 @@ var createPodcast = nexus_1.mutationField('createPodcast', {
         var input = _a.input;
         var prisma = _b.prisma, user = _b.user;
         return __awaiter(void 0, void 0, void 0, function () {
-            var _c;
+            var _c, categories, rest, categoryIdList, podcast;
             return __generator(this, function (_d) {
-                _c = input;
-                return [2 /*return*/];
+                switch (_d.label) {
+                    case 0:
+                        _c = input.categories, categories = _c === void 0 ? [] : _c, rest = __rest(input, ["categories"]);
+                        categoryIdList = categories.map(function (id) { return ({
+                            id: id,
+                        }); });
+                        return [4 /*yield*/, prisma.podcast.create({
+                                data: __assign({ owner: {
+                                        connect: {
+                                            id: user.userId,
+                                        },
+                                    }, categories: {
+                                        connect: categoryIdList,
+                                    } }, rest),
+                            })];
+                    case 1:
+                        podcast = _d.sent();
+                        return [2 /*return*/, podcast];
+                }
             });
         });
     },
 });
-exports.PodcastTypes = { Podcast: Podcast, createPodcastInput: createPodcastInput };
+exports.PodcastTypes = { Podcast: Podcast, createPodcastInput: createPodcastInput, createPodcast: createPodcast };
