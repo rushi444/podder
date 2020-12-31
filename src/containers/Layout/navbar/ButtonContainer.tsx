@@ -23,7 +23,19 @@ export const ButtonContainer = () => {
         </Button>
       )}
     </Box>
-  ) : null
+  ) : (
+    <Box>
+      <Button bg="transparent" color="black" m="0 .5rem">
+        <Link to="/podcasts">Podcasts</Link>
+      </Button>
+      <Button bg="transparent" color="black" m="0 .5rem">
+        <Link to="/speakers">Speakers</Link>
+      </Button>
+      <Button bg="transparent" color="black" m="0 .5rem">
+        <Link to="/account">Account</Link>
+      </Button>
+    </Box>
+  )
 }
 
 const showButtonsArr = ['/', '/signup', '/signin']
