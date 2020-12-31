@@ -1,4 +1,6 @@
 import { inputObjectType, mutationField, objectType } from 'nexus'
+import { list, NexusListDef, queryField } from 'nexus/dist/core'
+import { prisma } from '../api/context'
 
 const Podcast = objectType({
   name: 'Podcast',
@@ -8,8 +10,8 @@ const Podcast = objectType({
     t.model.podcastLink()
     t.model.info()
     t.model.imageUrl()
-    t.model.owner()
-    t.model.categories()
+    t.model.owner({ type: 'User' })
+    t.model.categories({ type: 'Category' })
   },
 })
 
@@ -52,4 +54,16 @@ const createPodcast = mutationField('createPodcast', {
   },
 })
 
-export const PodcastTypes = { Podcast, createPodcastInput, createPodcast }
+const getAllPodcasts = queryField('getAllPodcasts', {
+  type: list(Podcast),
+  resolve: async (parent, args, context, info) => {
+    return await context.prisma.podcast.findMany()
+  },
+})
+
+export const PodcastTypes = {
+  Podcast,
+  createPodcastInput,
+  createPodcast,
+  getAllPodcasts,
+}

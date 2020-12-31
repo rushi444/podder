@@ -116,7 +116,7 @@ export interface NexusGenFieldTypes {
     user: NexusGenRootTypes['User']; // User!
   }
   Query: { // field return type
-    ok: boolean; // Boolean!
+    getAllPodcasts: Array<NexusGenRootTypes['Podcast'] | null> | null; // [Podcast]
   }
   User: { // field return type
     email: string; // String!
@@ -158,7 +158,7 @@ export interface NexusGenFieldTypeNames {
     user: 'User'
   }
   Query: { // field return type name
-    ok: 'Boolean'
+    getAllPodcasts: 'Podcast'
   }
   User: { // field return type name
     email: 'String'

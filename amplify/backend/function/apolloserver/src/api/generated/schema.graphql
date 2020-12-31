@@ -73,7 +73,7 @@ type Profile {
 }
 
 type Query {
-  ok: Boolean!
+  getAllPodcasts: [Podcast]
 }
 
 type User {
