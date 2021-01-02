@@ -1,6 +1,10 @@
-import { inputObjectType, mutationField, objectType } from 'nexus'
-import { list, NexusListDef, queryField } from 'nexus/dist/core'
-import { prisma } from '../api/context'
+import {
+  inputObjectType,
+  mutationField,
+  objectType,
+  list,
+  queryField,
+} from 'nexus'
 
 const Podcast = objectType({
   name: 'Podcast',
