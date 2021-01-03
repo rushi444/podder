@@ -117,6 +117,7 @@ export interface NexusGenFieldTypes {
   }
   Query: { // field return type
     getAllPodcasts: Array<NexusGenRootTypes['Podcast'] | null> | null; // [Podcast]
+    me: NexusGenRootTypes['User'] | null; // User
   }
   User: { // field return type
     email: string; // String!
@@ -159,6 +160,7 @@ export interface NexusGenFieldTypeNames {
   }
   Query: { // field return type name
     getAllPodcasts: 'Podcast'
+    me: 'User'
   }
   User: { // field return type name
     email: 'String'

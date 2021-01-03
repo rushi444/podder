@@ -60,7 +60,6 @@ var __rest = (this && this.__rest) || function (s, e) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.PodcastTypes = void 0;
 var nexus_1 = require("nexus");
-var core_1 = require("nexus/dist/core");
 var Podcast = nexus_1.objectType({
     name: 'Podcast',
     definition: function (t) {
@@ -115,8 +114,8 @@ var createPodcast = nexus_1.mutationField('createPodcast', {
         });
     },
 });
-var getAllPodcasts = core_1.queryField('getAllPodcasts', {
-    type: core_1.list(Podcast),
+var getAllPodcasts = nexus_1.queryField('getAllPodcasts', {
+    type: nexus_1.list(Podcast),
     resolve: function (parent, args, context, info) { return __awaiter(void 0, void 0, void 0, function () {
         return __generator(this, function (_a) {
             switch (_a.label) {

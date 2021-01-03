@@ -134,8 +134,28 @@ var login = nexus_1.mutationField('login', {
         });
     },
 });
+var me = nexus_1.queryField('me', {
+    type: User,
+    resolve: function (parent, args, _a, info) {
+        var prisma = _a.prisma, user = _a.user;
+        return __awaiter(void 0, void 0, void 0, function () {
+            var me;
+            return __generator(this, function (_b) {
+                switch (_b.label) {
+                    case 0: return [4 /*yield*/, prisma.user.findUnique({
+                            where: { id: user.userId },
+                        })];
+                    case 1:
+                        me = _b.sent();
+                        return [2 /*return*/, me];
+                }
+            });
+        });
+    },
+});
 exports.UserTypes = {
     User: User,
     createUser: createUser,
     login: login,
+    me: me,
 };

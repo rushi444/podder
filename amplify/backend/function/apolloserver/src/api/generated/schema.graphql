@@ -74,6 +74,7 @@ type Profile {
 
 type Query {
   getAllPodcasts: [Podcast]
+  me: User
 }
 
 type User {

@@ -1,4 +1,4 @@
-import { inputObjectType, mutationField, objectType } from 'nexus'
+import { inputObjectType, mutationField, objectType, queryField } from 'nexus'
 import { hash, verify } from 'argon2'
 import { sign } from 'jsonwebtoken'
 
@@ -80,8 +80,19 @@ const login = mutationField('login', {
   },
 })
 
+const me = queryField('me', {
+  type: User,
+  resolve: async (parent, args, { prisma, user }, info) => {
+    const me = await prisma.user.findUnique({
+      where: { id: user.userId },
+    })
+    return me
+  },
+})
+
 export const UserTypes = {
   User,
   createUser,
   login,
+  me,
 }
