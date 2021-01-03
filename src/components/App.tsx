@@ -6,6 +6,7 @@ import { Register } from '../containers/Auth/register'
 import { Onboard } from '../containers/Auth/onboard'
 import { Layout } from '../containers/Layout'
 import { Home } from '../containers/Home'
+import { Dashboard } from '../containers/Dashboard'
 
 export const App = () => {
   return (
@@ -16,6 +17,7 @@ export const App = () => {
           <Route exact path="/signup" component={Register} />
           <Route exact path="/signin" component={Login} />
           <Route exact path="/onboard" component={Onboard} />
+          <Route exact path="/dashboard" component={Dashboard} />
         </Switch>
       </Layout>
     </Router>
