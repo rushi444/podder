@@ -11,8 +11,10 @@ import {
   isPasswordMatch,
 } from './formHelpers'
 import { CREATE_USER } from '../../../graphql/mutations'
+import { useAuthData } from '../../../hooks/useAuthData'
 
 export const RegisterForm = () => {
+  const { setUserData } = useAuthData()
   const history = useHistory()
 
   const { handleSubmit, control, watch } = useForm({
@@ -21,7 +23,10 @@ export const RegisterForm = () => {
   })
 
   const [createUser, { loading }] = useMutation(CREATE_USER, {
-    onCompleted: () => history.push('/onboard'),
+    onCompleted: data => {
+      history.push('/onboard')
+      setUserData(data.login.user)
+    },
   })
 
   const pwd = watch('password')

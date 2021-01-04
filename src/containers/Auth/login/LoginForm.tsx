@@ -7,9 +7,11 @@ import { useHistory } from 'react-router-dom'
 import { InputField } from '../../../components/fields/InputField'
 import { loginDefaultValues, loginRules } from './formHelpers'
 import { LOGIN } from '../../../graphql/mutations'
+import { useAuthData } from '../../../hooks/useAuthData'
 
 export const LoginForm = () => {
   const history = useHistory()
+  const { setUserData } = useAuthData()
   const { handleSubmit, control } = useForm({
     mode: 'onChange',
     defaultValues: loginDefaultValues,
@@ -18,6 +20,7 @@ export const LoginForm = () => {
   const [login, { data, loading }] = useMutation(LOGIN, {
     onCompleted: data => {
       localStorage.setItem('token', data.login.token)
+      setUserData(data.login.user)
       history.push('/dashboard')
     },
   })
