@@ -22,6 +22,7 @@ export const ALL_PODCASTS_QUERY = gql`
         name
       }
       owner {
+        id
         name
       }
     }
