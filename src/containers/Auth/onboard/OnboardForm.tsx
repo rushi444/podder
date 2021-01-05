@@ -36,7 +36,10 @@ export const OnboardForm = () => {
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
-      <ImageUploadField setImageUrl={setImageUrl} />
+      <ImageUploadField
+        label="Add a profile picture"
+        setImageUrl={setImageUrl}
+      />
       <TextAreaField
         name="bio"
         label="Intoduce yourself..."

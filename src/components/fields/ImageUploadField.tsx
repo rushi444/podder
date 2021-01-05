@@ -5,10 +5,11 @@ import axios from 'axios'
 import styled from '@emotion/styled'
 
 type Props = {
+  label: string
   setImageUrl: (url: string) => void
 }
 
-export const ImageUploadField = ({ setImageUrl }: Props) => {
+export const ImageUploadField = ({ setImageUrl, label }: Props) => {
   const onDrop = useCallback(async acceptedFiles => {
     try {
       const data = new FormData()
@@ -34,7 +35,7 @@ export const ImageUploadField = ({ setImageUrl }: Props) => {
 
   return (
     <Box pt="1rem">
-      <FormLabel>Add a profile picture</FormLabel>
+      <FormLabel>{label}</FormLabel>
       <DropZone {...getRootProps()} active={isDragActive.toString()}>
         <input {...getInputProps()} />
         {isDragActive ? (

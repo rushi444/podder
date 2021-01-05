@@ -26,8 +26,8 @@ export const Podcast = ({
         <Text>Hosted by: {owner?.name}</Text>
 
         <Text>
-          {temp.map((category: string) => (
-            <Badge borderRadius="full" px="2" colorScheme="teal" mr="1">
+          {temp.map((category: string, index: number) => (
+            <Badge key={index} borderRadius="full" px="2" colorScheme="teal" mr="1">
               {category}
             </Badge>
           ))}

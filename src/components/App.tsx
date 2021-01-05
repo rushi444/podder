@@ -8,7 +8,7 @@ import { Layout } from '../containers/Layout'
 import { Home } from '../containers/Home'
 import { Dashboard } from '../containers/Dashboard'
 import { Podcasts } from '../containers/Podcasts'
-import { AddPodcast } from '../containers/addPodcast'
+import { AddPodcast } from '../containers/AddPodcast'
 
 export const App = () => {
   return (
