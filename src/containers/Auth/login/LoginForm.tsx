@@ -1,5 +1,5 @@
 import React from 'react'
-import { Box, Button } from '@chakra-ui/react'
+import { Button } from '@chakra-ui/react'
 import { useForm } from 'react-hook-form'
 import { useMutation } from '@apollo/client'
 import { useHistory } from 'react-router-dom'
@@ -30,7 +30,6 @@ export const LoginForm = () => {
   }
 
   return (
-    <Box height="100%" alignContent="center">
       <form onSubmit={handleSubmit(onSubmit)}>
         <InputField
           name="email"
@@ -54,7 +53,6 @@ export const LoginForm = () => {
           Login
         </Button>
       </form>
-    </Box>
   )
 }
 

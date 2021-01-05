@@ -37,3 +37,23 @@ export const UPSERT_PROFILE = gql`
     }
   }
 `
+
+export const CREATE_PODCAST = gql`
+  mutation CreatePodcast($input: createPodcastInput) {
+    createPodcast(input: $input) {
+      id
+      name
+      podcastLink
+      info
+      imageUrl
+      owner {
+        name
+        email
+        profile {
+          bio
+          profilePic
+        }
+      }
+    }
+  }
+`

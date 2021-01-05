@@ -8,6 +8,7 @@ import { Layout } from '../containers/Layout'
 import { Home } from '../containers/Home'
 import { Dashboard } from '../containers/Dashboard'
 import { Podcasts } from '../containers/Podcasts'
+import { AddPodcast } from '../containers/addPodcast'
 
 export const App = () => {
   return (
@@ -20,6 +21,7 @@ export const App = () => {
           <Route exact path="/onboard" component={Onboard} />
           <Route exact path="/dashboard" component={Dashboard} />
           <Route exact path="/podcasts" component={Podcasts} />
+          <Route exact path='/addPodcast' component={AddPodcast} />
         </Switch>
       </Layout>
     </Router>
