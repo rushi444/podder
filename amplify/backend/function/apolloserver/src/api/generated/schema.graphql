@@ -75,6 +75,11 @@ type Profile {
 type Query {
   getAllPodcasts: [Podcast]
   me: User
+  searchPodcasts(input: searchInput): [Podcast]
+}
+
+input searchInput {
+  searchQuery: String!
 }
 
 type User {

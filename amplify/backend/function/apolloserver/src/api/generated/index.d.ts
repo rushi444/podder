@@ -48,6 +48,9 @@ export interface NexusGenInputs {
     email: string; // String!
     password: string; // String!
   }
+  searchInput: { // input type
+    searchQuery: string; // String!
+  }
 }
 
 export interface NexusGenEnums {
@@ -118,6 +121,7 @@ export interface NexusGenFieldTypes {
   Query: { // field return type
     getAllPodcasts: Array<NexusGenRootTypes['Podcast'] | null> | null; // [Podcast]
     me: NexusGenRootTypes['User'] | null; // User
+    searchPodcasts: Array<NexusGenRootTypes['Podcast'] | null> | null; // [Podcast]
   }
   User: { // field return type
     email: string; // String!
@@ -161,6 +165,7 @@ export interface NexusGenFieldTypeNames {
   Query: { // field return type name
     getAllPodcasts: 'Podcast'
     me: 'User'
+    searchPodcasts: 'Podcast'
   }
   User: { // field return type name
     email: 'String'
@@ -197,6 +202,11 @@ export interface NexusGenArgTypes {
       cursor?: NexusGenInputs['CategoryWhereUniqueInput'] | null; // CategoryWhereUniqueInput
       skip?: number | null; // Int
       take?: number | null; // Int
+    }
+  }
+  Query: {
+    searchPodcasts: { // args
+      input?: NexusGenInputs['searchInput'] | null; // searchInput
     }
   }
 }

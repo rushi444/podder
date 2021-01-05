@@ -125,9 +125,53 @@ var getAllPodcasts = nexus_1.queryField('getAllPodcasts', {
         });
     }); },
 });
+var searchInput = nexus_1.inputObjectType({
+    name: 'searchInput',
+    definition: function (t) {
+        t.nonNull.string('searchQuery');
+    },
+});
+var searchPodcasts = nexus_1.queryField('searchPodcasts', {
+    type: nexus_1.list(Podcast),
+    args: { input: searchInput },
+    resolve: function (parent, _a, _b, info) {
+        var input = _a.input;
+        var prisma = _b.prisma;
+        return __awaiter(void 0, void 0, void 0, function () {
+            var searchQuery, podcasts;
+            return __generator(this, function (_c) {
+                switch (_c.label) {
+                    case 0:
+                        searchQuery = input.searchQuery;
+                        return [4 /*yield*/, prisma.podcast.findMany({
+                                where: {
+                                    OR: [
+                                        {
+                                            name: {
+                                                contains: searchQuery,
+                                            },
+                                        },
+                                        {
+                                            info: {
+                                                contains: searchQuery,
+                                            },
+                                        },
+                                    ],
+                                },
+                            })];
+                    case 1:
+                        podcasts = _c.sent();
+                        return [2 /*return*/, podcasts];
+                }
+            });
+        });
+    },
+});
 exports.PodcastTypes = {
     Podcast: Podcast,
     createPodcastInput: createPodcastInput,
     createPodcast: createPodcast,
     getAllPodcasts: getAllPodcasts,
+    searchInput: searchInput,
+    searchPodcasts: searchPodcasts,
 };
