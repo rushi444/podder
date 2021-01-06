@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import { useQuery } from '@apollo/client'
 
 import { SEARCH_PODCASTS } from '../../graphql/queries'
@@ -12,8 +12,6 @@ import { SearchField } from '../../components/fields/SearchField'
 export const PodcastList = () => {
   const history = useHistory()
 
-  const [searchQuery, setSearchQuery] = useState('')
-
   const { data, loading, error, refetch } = useQuery(SEARCH_PODCASTS, {
     variables: { input: { searchQuery: '' } },
   })
@@ -23,7 +21,6 @@ export const PodcastList = () => {
   const onAddPodcast = () => history.push('/addPodcast')
 
   const handleSearch = (value: string) => {
-    setSearchQuery(value)
     refetch({ input: { searchQuery: value } })
   }
 
