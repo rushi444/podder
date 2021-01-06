@@ -83,11 +83,13 @@ const searchPodcasts = queryField('searchPodcasts', {
           {
             name: {
               contains: searchQuery,
+              mode: 'insensitive',
             },
           },
           {
             info: {
               contains: searchQuery,
+              mode: 'insensitive',
             },
           },
         ],

@@ -149,11 +149,13 @@ var searchPodcasts = nexus_1.queryField('searchPodcasts', {
                                         {
                                             name: {
                                                 contains: searchQuery,
+                                                mode: 'insensitive',
                                             },
                                         },
                                         {
                                             info: {
                                                 contains: searchQuery,
+                                                mode: 'insensitive',
                                             },
                                         },
                                     ],
