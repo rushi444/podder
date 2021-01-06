@@ -49,7 +49,7 @@ export interface NexusGenInputs {
     password: string; // String!
   }
   searchInput: { // input type
-    searchQuery: string; // String!
+    searchQuery?: string | null; // String
   }
 }
 

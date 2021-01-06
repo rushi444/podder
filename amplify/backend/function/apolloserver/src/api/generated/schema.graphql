@@ -79,7 +79,7 @@ type Query {
 }
 
 input searchInput {
-  searchQuery: String!
+  searchQuery: String
 }
 
 type User {

@@ -68,7 +68,7 @@ const getAllPodcasts = queryField('getAllPodcasts', {
 const searchInput = inputObjectType({
   name: 'searchInput',
   definition: t => {
-    t.nonNull.string('searchQuery')
+    t.string('searchQuery')
   },
 })
 
@@ -76,7 +76,7 @@ const searchPodcasts = queryField('searchPodcasts', {
   type: list(Podcast),
   args: { input: searchInput },
   resolve: async (parent, { input }, { prisma }, info) => {
-    const { searchQuery } = input
+    const { searchQuery = '' } = input
     const podcasts = await prisma.podcast.findMany({
       where: {
         OR: [

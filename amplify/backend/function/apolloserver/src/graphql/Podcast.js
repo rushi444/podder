@@ -128,7 +128,7 @@ var getAllPodcasts = nexus_1.queryField('getAllPodcasts', {
 var searchInput = nexus_1.inputObjectType({
     name: 'searchInput',
     definition: function (t) {
-        t.nonNull.string('searchQuery');
+        t.string('searchQuery');
     },
 });
 var searchPodcasts = nexus_1.queryField('searchPodcasts', {
@@ -138,11 +138,11 @@ var searchPodcasts = nexus_1.queryField('searchPodcasts', {
         var input = _a.input;
         var prisma = _b.prisma;
         return __awaiter(void 0, void 0, void 0, function () {
-            var searchQuery, podcasts;
-            return __generator(this, function (_c) {
-                switch (_c.label) {
+            var _c, searchQuery, podcasts;
+            return __generator(this, function (_d) {
+                switch (_d.label) {
                     case 0:
-                        searchQuery = input.searchQuery;
+                        _c = input.searchQuery, searchQuery = _c === void 0 ? '' : _c;
                         return [4 /*yield*/, prisma.podcast.findMany({
                                 where: {
                                     OR: [
@@ -162,7 +162,7 @@ var searchPodcasts = nexus_1.queryField('searchPodcasts', {
                                 },
                             })];
                     case 1:
-                        podcasts = _c.sent();
+                        podcasts = _d.sent();
                         return [2 /*return*/, podcasts];
                 }
             });
