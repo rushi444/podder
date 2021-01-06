@@ -28,3 +28,21 @@ export const ALL_PODCASTS_QUERY = gql`
     }
   }
 `
+
+export const SEARCH_PODCASTS = gql`
+  query SearchPodcasts($input: searchInput) {
+    searchPodcasts(input: $input) {
+      id
+      name
+      podcastLink
+      info
+      imageUrl
+      categories {
+        name
+      }
+      owner {
+        name
+      }
+    }
+  }
+`

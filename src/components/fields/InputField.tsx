@@ -12,7 +12,7 @@ import { useMetaError } from '../../hooks/useMetaError'
 
 type Props = {
   name: string
-  label: string
+  label?: string
   control: Control
   rules?: any
   ref?: any
