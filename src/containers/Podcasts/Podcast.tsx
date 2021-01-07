@@ -1,5 +1,6 @@
-import { Avatar, Badge, Box, GridItem, Heading, Text } from '@chakra-ui/react'
 import React from 'react'
+import { Avatar, Badge, Box, GridItem, Heading, Text } from '@chakra-ui/react'
+
 import { Podcast as TPodcast } from '../../utils/types'
 
 export const Podcast = ({
@@ -27,7 +28,13 @@ export const Podcast = ({
 
         <Text>
           {temp.map((category: string, index: number) => (
-            <Badge key={index} borderRadius="full" px="2" colorScheme="teal" mr="1">
+            <Badge
+              key={index}
+              borderRadius="full"
+              px="2"
+              colorScheme="teal"
+              mr="1"
+            >
               {category}
             </Badge>
           ))}

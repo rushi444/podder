@@ -1,12 +1,13 @@
 import React from 'react'
 import { useQuery } from '@apollo/client'
+import { useHistory } from 'react-router-dom'
+import { Button, Flex, Grid, Heading } from '@chakra-ui/react'
 
 import { SEARCH_PODCASTS } from '../../graphql/queries'
-import { Button, Flex, Grid, Heading } from '@chakra-ui/react'
 import { Podcast } from './Podcast'
 import { LoadingSpinner } from '../../components/LoadingSpinner'
 import { Podcast as TPodcast } from '../../utils/types'
-import { useHistory } from 'react-router-dom'
+
 import { SearchField } from '../../components/fields/SearchField'
 
 export const PodcastList = () => {
