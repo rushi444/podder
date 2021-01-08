@@ -6,9 +6,16 @@ import { CREATE_PODCAST } from '../../graphql/mutations'
 import { InputField } from '../../components/fields/InputField'
 import { ImageUploadField } from '../../components/fields/ImageUploadField'
 import { Button } from '@chakra-ui/react'
+import { CategorySelectField } from '../../components/fields/CategorySelectField'
+import { useSelectedCategories } from '../../hooks/useSelectedCategories'
 
 export const AddPodcastForm = () => {
   const history = useHistory()
+  const {
+    selected: selectedCategories,
+    clearSelected,
+  } = useSelectedCategories()
+  
   const { handleSubmit, control } = useForm({
     mode: 'onChange',
     defaultValues: {
@@ -22,12 +29,17 @@ export const AddPodcastForm = () => {
 
   const [createPodcast, { loading }] = useMutation(CREATE_PODCAST, {
     onCompleted: () => {
+      clearSelected()
       history.push('/podcasts')
     },
   })
 
   const onSubmit = (formValues: FormValues) => {
-    createPodcast({ variables: { input: { ...formValues, imageUrl } } })
+    createPodcast({
+      variables: {
+        input: { ...formValues, imageUrl, categories: selectedCategories },
+      },
+    })
   }
 
   return (
@@ -50,6 +62,7 @@ export const AddPodcastForm = () => {
         control={control}
         rules={{ required: 'Required!' }}
       />
+      <CategorySelectField />
       <Button
         type="submit"
         isLoading={loading}

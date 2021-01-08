@@ -11,7 +11,7 @@ export const Podcast = ({
   categories,
   owner,
 }: TPodcast) => {
-  const temp = ['Clout', 'Relationships', 'Mens']
+  console.log('categories......', categories)
   return (
     <GridItem
       display="flex"
@@ -27,7 +27,7 @@ export const Podcast = ({
         <Text>Hosted by: {owner?.name}</Text>
 
         <Text>
-          {temp.map((category: string, index: number) => (
+          {categories.map((category: Category, index: number) => (
             <Badge
               key={index}
               borderRadius="full"
@@ -35,11 +35,16 @@ export const Podcast = ({
               colorScheme="teal"
               mr="1"
             >
-              {category}
+              {category.name}
             </Badge>
           ))}
         </Text>
       </Box>
     </GridItem>
   )
+}
+
+type Category = {
+  id?: string
+  name: string
 }
