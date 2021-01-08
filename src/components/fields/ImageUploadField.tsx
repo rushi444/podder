@@ -13,7 +13,6 @@ export const ImageUploadField = ({ setImageUrl, label }: Props) => {
   const onDrop = useCallback(async acceptedFiles => {
     try {
       const data = new FormData()
-      console.log(acceptedFiles[0])
       data.append('file', acceptedFiles[0])
       data.append('resource_type', 'raw')
       data.append('upload_preset', 'podder')

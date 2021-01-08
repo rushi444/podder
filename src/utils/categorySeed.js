@@ -47,10 +47,9 @@ const seedCategories = async categories => {
           },
         },
       })
-      console.log(data)
       return data
     } catch (err) {
-      console.log('ERR', err)
+      console.error(err)
     }
   })
 }

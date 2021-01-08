@@ -11,7 +11,6 @@ export const Podcast = ({
   categories,
   owner,
 }: TPodcast) => {
-  console.log('categories......', categories)
   return (
     <GridItem
       display="flex"

@@ -11,7 +11,7 @@ type Props = {
 
 export const CategoryBadge = ({ category }: Props) => {
   const { selected, addCategory, removeCategory } = useSelectedCategories()
-  console.log(selected)
+
   const toggleSelect = () =>
     selected.includes(category.name)
       ? removeCategory(category.name)
