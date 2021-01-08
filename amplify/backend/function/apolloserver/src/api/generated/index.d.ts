@@ -27,6 +27,9 @@ export interface NexusGenInputs {
     id?: string | null; // String
     name?: string | null; // String
   }
+  batchCategoriesInput: { // input type
+    name: string; // String!
+  }
   createPodcastInput: { // input type
     categories?: Array<string | null> | null; // [String]
     imageUrl?: string | null; // String
@@ -98,6 +101,7 @@ export interface NexusGenFieldTypes {
     podcasts: NexusGenRootTypes['Podcast'][]; // [Podcast!]!
   }
   Mutation: { // field return type
+    createCategory: NexusGenRootTypes['Category'] | null; // Category
     createPodcast: NexusGenRootTypes['Podcast'] | null; // Podcast
     createUser: NexusGenRootTypes['User'] | null; // User
     login: NexusGenRootTypes['AuthPayload'] | null; // AuthPayload
@@ -119,6 +123,7 @@ export interface NexusGenFieldTypes {
     user: NexusGenRootTypes['User']; // User!
   }
   Query: { // field return type
+    getAllCategories: Array<NexusGenRootTypes['Category'] | null> | null; // [Category]
     getAllPodcasts: Array<NexusGenRootTypes['Podcast'] | null> | null; // [Podcast]
     me: NexusGenRootTypes['User'] | null; // User
     searchPodcasts: Array<NexusGenRootTypes['Podcast'] | null> | null; // [Podcast]
@@ -142,6 +147,7 @@ export interface NexusGenFieldTypeNames {
     podcasts: 'Podcast'
   }
   Mutation: { // field return type name
+    createCategory: 'Category'
     createPodcast: 'Podcast'
     createUser: 'User'
     login: 'AuthPayload'
@@ -163,6 +169,7 @@ export interface NexusGenFieldTypeNames {
     user: 'User'
   }
   Query: { // field return type name
+    getAllCategories: 'Category'
     getAllPodcasts: 'Podcast'
     me: 'User'
     searchPodcasts: 'Podcast'
@@ -184,6 +191,9 @@ export interface NexusGenArgTypes {
     }
   }
   Mutation: {
+    createCategory: { // args
+      input?: NexusGenInputs['batchCategoriesInput'] | null; // batchCategoriesInput
+    }
     createPodcast: { // args
       input?: NexusGenInputs['createPodcastInput'] | null; // createPodcastInput
     }

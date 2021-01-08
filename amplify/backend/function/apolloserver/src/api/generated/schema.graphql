@@ -7,6 +7,10 @@ type AuthPayload {
   user: User
 }
 
+input batchCategoriesInput {
+  name: String!
+}
+
 type Category {
   id: String!
   name: String!
@@ -44,6 +48,7 @@ input loginInput {
 }
 
 type Mutation {
+  createCategory(input: batchCategoriesInput): Category
   createPodcast(input: createPodcastInput): Podcast
   createUser(input: createUserInput): User
   login(input: loginInput): AuthPayload
@@ -73,6 +78,7 @@ type Profile {
 }
 
 type Query {
+  getAllCategories: [Category]
   getAllPodcasts: [Podcast]
   me: User
   searchPodcasts(input: searchInput): [Podcast]
