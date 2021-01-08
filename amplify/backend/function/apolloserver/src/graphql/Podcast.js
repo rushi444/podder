@@ -89,13 +89,13 @@ var createPodcast = nexus_1.mutationField('createPodcast', {
         var input = _a.input;
         var prisma = _b.prisma, user = _b.user;
         return __awaiter(void 0, void 0, void 0, function () {
-            var _c, categories, rest, categoryIdList, podcast;
+            var _c, categories, rest, categoryNameList, podcast;
             return __generator(this, function (_d) {
                 switch (_d.label) {
                     case 0:
                         _c = input.categories, categories = _c === void 0 ? [] : _c, rest = __rest(input, ["categories"]);
-                        categoryIdList = categories.map(function (id) { return ({
-                            id: id,
+                        categoryNameList = categories.map(function (name) { return ({
+                            name: name,
                         }); });
                         return [4 /*yield*/, prisma.podcast.create({
                                 data: __assign({ owner: {
@@ -103,7 +103,7 @@ var createPodcast = nexus_1.mutationField('createPodcast', {
                                             id: user.userId,
                                         },
                                     }, categories: {
-                                        connect: categoryIdList,
+                                        connect: categoryNameList,
                                     } }, rest),
                             })];
                     case 1:

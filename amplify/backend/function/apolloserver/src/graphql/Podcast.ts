@@ -36,8 +36,8 @@ const createPodcast = mutationField('createPodcast', {
   resolve: async (parent, { input }, { prisma, user }, info) => {
     const { categories = [], ...rest } = input
 
-    const categoryIdList = categories.map((id: string) => ({
-      id,
+    const categoryNameList = categories.map((name: string) => ({
+      name,
     }))
 
     const podcast = await prisma.podcast.create({
@@ -48,7 +48,7 @@ const createPodcast = mutationField('createPodcast', {
           },
         },
         categories: {
-          connect: categoryIdList,
+          connect: categoryNameList,
         },
         ...rest,
       },
