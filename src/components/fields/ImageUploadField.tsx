@@ -25,7 +25,7 @@ export const ImageUploadField = ({ setImageUrl, label }: Props) => {
     } catch (err) {
       console.error('Error uploading file...', err)
     }
-  }, [])
+  }, [setImageUrl])
 
   const { isDragActive, getRootProps, getInputProps } = useDropzone({
     onDrop,
