@@ -17,6 +17,8 @@ model User {
   password String
   name     String
 
+  isSpeaker Boolean @default(false)
+
   profile Profile?
   podcast Podcast[]
 
