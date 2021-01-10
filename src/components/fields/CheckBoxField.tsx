@@ -15,27 +15,17 @@ import { useMetaError } from '../../hooks/useMetaError'
 type Props = {
   name: string
   label?: string
-  control: Control
-  rules?: any
-  ref?: any
-  type: string
+  ref: any
 }
 
 export const CheckBoxField = (props: Props) => {
-  const { label } = props
-
-  const { field, meta } = useController(props)
-  console.log(field.ref)
-  const { errorMessage, hasError } = useMetaError(meta)
+  const { name, ref, label } = props
 
   return (
     <Box m="3% 0">
-      <FormControl isInvalid={hasError}>
-        <Checkbox {...field}>
-          {label}
-        </Checkbox>
-        <FormErrorMessage>{errorMessage}</FormErrorMessage>
-      </FormControl>
+      <Checkbox name={name} ref={ref}>
+        {label}
+      </Checkbox>
     </Box>
   )
 }

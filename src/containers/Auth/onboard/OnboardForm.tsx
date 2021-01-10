@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Button } from '@chakra-ui/react'
+import { Button, Checkbox } from '@chakra-ui/react'
 import { useForm } from 'react-hook-form'
 import { useMutation } from '@apollo/client'
 import { useHistory } from 'react-router-dom'
@@ -11,10 +11,11 @@ import { CheckBoxField } from '../../../components/fields/CheckBoxField'
 
 export const OnboardForm = () => {
   const history = useHistory()
-  const { handleSubmit, control } = useForm({
+  const { handleSubmit, control, register } = useForm({
     mode: 'onSubmit',
     defaultValues: {
-      bio: ''
+      bio: '',
+      isSpeaker: true,
     },
   })
 
@@ -31,7 +32,6 @@ export const OnboardForm = () => {
         input: {
           ...formValues,
           profilePic: imageUrl,
-  
         },
       },
     })
@@ -50,9 +50,8 @@ export const OnboardForm = () => {
       />
       <CheckBoxField
         name="isSpeaker"
-        label="I'd like to be a speaker on podcasts"
-        type="checkbox"
-        control={control}
+        ref={register}
+        label="I'd like to be a podcast guest"
       />
       <Button mr=".5rem" onClick={() => history.push('/dashboard')}>
         Save for later
