@@ -7,13 +7,14 @@ import { useHistory } from 'react-router-dom'
 import { UPSERT_PROFILE } from '../../../graphql/mutations'
 import { TextAreaField } from '../../../components/fields/TextAreaField'
 import { ImageUploadField } from '../../../components/fields/ImageUploadField'
+import { CheckBoxField } from '../../../components/fields/CheckBoxField'
 
 export const OnboardForm = () => {
   const history = useHistory()
   const { handleSubmit, control } = useForm({
     mode: 'onSubmit',
     defaultValues: {
-      bio: '',
+      bio: ''
     },
   })
 
@@ -24,11 +25,13 @@ export const OnboardForm = () => {
   })
 
   const onSubmit = (formValues: FormValues) => {
+    console.log(formValues)
     upsertProfile({
       variables: {
         input: {
           ...formValues,
           profilePic: imageUrl,
+  
         },
       },
     })
@@ -43,6 +46,12 @@ export const OnboardForm = () => {
       <TextAreaField
         name="bio"
         label="Intoduce yourself..."
+        control={control}
+      />
+      <CheckBoxField
+        name="isSpeaker"
+        label="I'd like to be a speaker on podcasts"
+        type="checkbox"
         control={control}
       />
       <Button mr=".5rem" onClick={() => history.push('/dashboard')}>
