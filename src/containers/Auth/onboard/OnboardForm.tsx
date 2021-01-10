@@ -15,7 +15,7 @@ export const OnboardForm = () => {
     mode: 'onSubmit',
     defaultValues: {
       bio: '',
-      isSpeaker: true,
+      isSpeaker: false,
     },
   })
 
