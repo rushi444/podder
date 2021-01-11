@@ -6,7 +6,7 @@ import {
   queryField,
 } from 'nexus'
 
-const Podcast = objectType({
+export const Podcast = objectType({
   name: 'Podcast',
   definition: t => {
     t.model.id()
@@ -19,7 +19,7 @@ const Podcast = objectType({
   },
 })
 
-const createPodcastInput = inputObjectType({
+export const createPodcastInput = inputObjectType({
   name: 'createPodcastInput',
   definition: t => {
     t.nonNull.string('name')
@@ -30,7 +30,7 @@ const createPodcastInput = inputObjectType({
   },
 })
 
-const createPodcast = mutationField('createPodcast', {
+export const createPodcast = mutationField('createPodcast', {
   type: Podcast,
   args: { input: createPodcastInput },
   resolve: async (parent, { input }, { prisma, user }, info) => {
@@ -58,7 +58,7 @@ const createPodcast = mutationField('createPodcast', {
   },
 })
 
-const getAllPodcasts = queryField('getAllPodcasts', {
+export const getAllPodcasts = queryField('getAllPodcasts', {
   type: list(Podcast),
   resolve: async (parent, args, context, info) => {
     return await context.prisma.podcast.findMany()
@@ -72,7 +72,7 @@ const searchInput = inputObjectType({
   },
 })
 
-const searchPodcasts = queryField('searchPodcasts', {
+export const searchPodcasts = queryField('searchPodcasts', {
   type: list(Podcast),
   args: { input: searchInput },
   resolve: async (parent, { input }, { prisma }, info) => {
@@ -98,12 +98,3 @@ const searchPodcasts = queryField('searchPodcasts', {
     return podcasts
   },
 })
-
-export const PodcastTypes = {
-  Podcast,
-  createPodcastInput,
-  createPodcast,
-  getAllPodcasts,
-  searchInput,
-  searchPodcasts,
-}

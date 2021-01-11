@@ -14,7 +14,7 @@ input batchCategoriesInput {
 type Category {
   id: String!
   name: String!
-  podcasts(cursor: PodcastWhereUniqueInput, skip: Int, take: Int): [Podcast!]!
+  podcasts(after: PodcastWhereUniqueInput, before: PodcastWhereUniqueInput, first: Int, last: Int): [Podcast!]!
 }
 
 input CategoryWhereUniqueInput {
@@ -57,7 +57,7 @@ type Mutation {
 }
 
 type Podcast {
-  categories(cursor: CategoryWhereUniqueInput, skip: Int, take: Int): [Category!]!
+  categories(after: CategoryWhereUniqueInput, before: CategoryWhereUniqueInput, first: Int, last: Int): [Category!]!
   id: String!
   imageUrl: String
   info: String

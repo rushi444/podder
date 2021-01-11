@@ -27,8 +27,8 @@ export type Context = {
 
 export const prisma = new PrismaClient()
 
-export const createContext = (ctx: any, headers: any): Context => {
-  const user = getUserWithToken(headers.authorization) as TokenSignature
+export const createContext = ({ req }: any): Context => {
+  const user = getUserWithToken(req.headers.authorization) as TokenSignature
   return {
     prisma,
     user,

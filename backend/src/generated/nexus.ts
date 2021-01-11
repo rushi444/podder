@@ -3,8 +3,8 @@
  * Do not make changes to this file directly
  */
 
-import * as prisma from "./../../node_modules/.prisma/client/index"
-import { Context as ctx } from "./../context"
+
+import { Context } from "./../context"
 
 
 declare global {
@@ -73,12 +73,30 @@ export interface NexusGenObjects {
     token?: string | null; // String
     user?: NexusGenRootTypes['User'] | null; // User
   }
-  Category: prisma.Category;
+  Category: { // root type
+    id: string; // String!
+    name: string; // String!
+  }
   Mutation: {};
-  Podcast: prisma.Podcast;
-  Profile: prisma.Profile;
+  Podcast: { // root type
+    id: string; // String!
+    imageUrl?: string | null; // String
+    info?: string | null; // String
+    name: string; // String!
+    podcastLink: string; // String!
+  }
+  Profile: { // root type
+    bio?: string | null; // String
+    id: string; // String!
+    profilePic: string; // String!
+  }
   Query: {};
-  User: prisma.User;
+  User: { // root type
+    email: string; // String!
+    id: string; // String!
+    isSpeaker: boolean; // Boolean!
+    name: string; // String!
+  }
 }
 
 export interface NexusGenInterfaces {
@@ -190,9 +208,10 @@ export interface NexusGenFieldTypeNames {
 export interface NexusGenArgTypes {
   Category: {
     podcasts: { // args
-      cursor?: NexusGenInputs['PodcastWhereUniqueInput'] | null; // PodcastWhereUniqueInput
-      skip?: number | null; // Int
-      take?: number | null; // Int
+      after?: NexusGenInputs['PodcastWhereUniqueInput'] | null; // PodcastWhereUniqueInput
+      before?: NexusGenInputs['PodcastWhereUniqueInput'] | null; // PodcastWhereUniqueInput
+      first?: number | null; // Int
+      last?: number | null; // Int
     }
   }
   Mutation: {
@@ -214,9 +233,10 @@ export interface NexusGenArgTypes {
   }
   Podcast: {
     categories: { // args
-      cursor?: NexusGenInputs['CategoryWhereUniqueInput'] | null; // CategoryWhereUniqueInput
-      skip?: number | null; // Int
-      take?: number | null; // Int
+      after?: NexusGenInputs['CategoryWhereUniqueInput'] | null; // CategoryWhereUniqueInput
+      before?: NexusGenInputs['CategoryWhereUniqueInput'] | null; // CategoryWhereUniqueInput
+      first?: number | null; // Int
+      last?: number | null; // Int
     }
   }
   Query: {
@@ -257,7 +277,7 @@ export type NexusGenFeaturesConfig = {
 }
 
 export interface NexusGenTypes {
-  context: ctx;
+  context: Context;
   inputTypes: NexusGenInputs;
   rootTypes: NexusGenRootTypes;
   inputTypeShapes: NexusGenInputs & NexusGenEnums & NexusGenScalars;

@@ -6,7 +6,7 @@ import {
   queryField,
 } from 'nexus'
 
-const Category = objectType({
+export const Category = objectType({
   name: 'Category',
   definition: t => {
     t.model.id()
@@ -15,14 +15,14 @@ const Category = objectType({
   },
 })
 
-const createCategoryInput = inputObjectType({
+export const createCategoryInput = inputObjectType({
   name: 'batchCategoriesInput',
   definition: t => {
     t.nonNull.string('name')
   },
 })
 
-const createCategory = mutationField('createCategory', {
+export const createCategory = mutationField('createCategory', {
   type: Category,
   args: { input: createCategoryInput },
   resolve: async (parent, { input }, { prisma }, info) => {
@@ -35,11 +35,9 @@ const createCategory = mutationField('createCategory', {
   },
 })
 
-const getAllCategories = queryField('getAllCategories', {
+export const getAllCategories = queryField('getAllCategories', {
   type: list(Category),
   resolve: async (parent, args, { prisma }, info) => {
     return await prisma.category.findMany()
   },
 })
-
-export const CategoryTypes = { Category, createCategoryInput, createCategory, getAllCategories }

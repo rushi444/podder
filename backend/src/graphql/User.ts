@@ -8,7 +8,7 @@ import {
 import { hash, verify } from 'argon2'
 import { sign } from 'jsonwebtoken'
 
-const User = objectType({
+export const User = objectType({
   name: 'User',
   definition: t => {
     t.model.id()
@@ -19,7 +19,7 @@ const User = objectType({
   },
 })
 
-const createUserInput = inputObjectType({
+export const createUserInput = inputObjectType({
   name: 'createUserInput',
   definition: t => {
     t.nonNull.string('name')
@@ -30,7 +30,7 @@ const createUserInput = inputObjectType({
   },
 })
 
-const createUser = mutationField('createUser', {
+export const createUser = mutationField('createUser', {
   type: 'User',
   args: { input: createUserInput },
   resolve: async (parent, { input }, { prisma }, info) => {
@@ -52,7 +52,7 @@ const createUser = mutationField('createUser', {
   },
 })
 
-const loginInput = inputObjectType({
+export const loginInput = inputObjectType({
   name: 'loginInput',
   definition: t => {
     t.nonNull.string('email')
@@ -60,7 +60,7 @@ const loginInput = inputObjectType({
   },
 })
 
-const login = mutationField('login', {
+export const login = mutationField('login', {
   type: 'AuthPayload',
   args: { input: loginInput },
   resolve: async (parent, { input }, { prisma }, info) => {
@@ -89,7 +89,7 @@ const login = mutationField('login', {
   },
 })
 
-const me = queryField('me', {
+export const me = queryField('me', {
   type: User,
   resolve: async (parent, args, { prisma, user }, info) => {
     const me = await prisma.user.findUnique({
@@ -99,7 +99,7 @@ const me = queryField('me', {
   },
 })
 
-const getAllSpeakers = queryField('getAllSpeakers', {
+export const getAllSpeakers = queryField('getAllSpeakers', {
   type: list(User),
   resolve: async (parent, args, { prisma }, info) => {
     const speakers = await prisma.user.findMany({
@@ -110,11 +110,3 @@ const getAllSpeakers = queryField('getAllSpeakers', {
     return speakers
   },
 })
-
-export const UserTypes = {
-  User,
-  createUser,
-  login,
-  me,
-  getAllSpeakers,
-}

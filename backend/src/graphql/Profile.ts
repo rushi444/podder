@@ -6,7 +6,7 @@ import {
   list,
 } from 'nexus'
 
-const Profile = objectType({
+export const Profile = objectType({
   name: 'Profile',
   definition: t => {
     t.model.id()
@@ -16,7 +16,7 @@ const Profile = objectType({
   },
 })
 
-const createProfileInput = inputObjectType({
+export const createProfileInput = inputObjectType({
   name: 'createProfileInput',
   definition: t => {
     t.string('bio')
@@ -24,7 +24,7 @@ const createProfileInput = inputObjectType({
   },
 })
 
-const upsertProfile = mutationField('upsertProfile', {
+export const upsertProfile = mutationField('upsertProfile', {
   type: Profile,
   args: { input: createProfileInput },
   resolve: async (parent, { input }, { prisma, user }, info) => {
@@ -40,9 +40,3 @@ const upsertProfile = mutationField('upsertProfile', {
     return profile
   },
 })
-
-
-export const ProfileTypes = {
-  Profile,
-  upsertProfile,
-}
