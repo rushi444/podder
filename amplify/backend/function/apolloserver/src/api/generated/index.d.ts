@@ -43,6 +43,7 @@ export interface NexusGenInputs {
   }
   createUserInput: { // input type
     email: string; // String!
+    isSpeaker?: boolean | null; // Boolean
     name: string; // String!
     password: string; // String!
     password2: string; // String!
@@ -125,12 +126,14 @@ export interface NexusGenFieldTypes {
   Query: { // field return type
     getAllCategories: Array<NexusGenRootTypes['Category'] | null> | null; // [Category]
     getAllPodcasts: Array<NexusGenRootTypes['Podcast'] | null> | null; // [Podcast]
+    getAllSpeakers: Array<NexusGenRootTypes['User'] | null> | null; // [User]
     me: NexusGenRootTypes['User'] | null; // User
     searchPodcasts: Array<NexusGenRootTypes['Podcast'] | null> | null; // [Podcast]
   }
   User: { // field return type
     email: string; // String!
     id: string; // String!
+    isSpeaker: boolean; // Boolean!
     name: string; // String!
     profile: NexusGenRootTypes['Profile'] | null; // Profile
   }
@@ -171,12 +174,14 @@ export interface NexusGenFieldTypeNames {
   Query: { // field return type name
     getAllCategories: 'Category'
     getAllPodcasts: 'Podcast'
+    getAllSpeakers: 'User'
     me: 'User'
     searchPodcasts: 'Podcast'
   }
   User: { // field return type name
     email: 'String'
     id: 'String'
+    isSpeaker: 'Boolean'
     name: 'String'
     profile: 'Profile'
   }

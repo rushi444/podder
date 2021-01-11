@@ -37,6 +37,7 @@ input createProfileInput {
 
 input createUserInput {
   email: String!
+  isSpeaker: Boolean
   name: String!
   password: String!
   password2: String!
@@ -80,6 +81,7 @@ type Profile {
 type Query {
   getAllCategories: [Category]
   getAllPodcasts: [Podcast]
+  getAllSpeakers: [User]
   me: User
   searchPodcasts(input: searchInput): [Podcast]
 }
@@ -91,6 +93,7 @@ input searchInput {
 type User {
   email: String!
   id: String!
+  isSpeaker: Boolean!
   name: String!
   profile: Profile
 }

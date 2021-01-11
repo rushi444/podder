@@ -1,4 +1,10 @@
-import { inputObjectType, mutationField, objectType } from 'nexus'
+import {
+  inputObjectType,
+  mutationField,
+  objectType,
+  queryField,
+  list,
+} from 'nexus'
 
 const Profile = objectType({
   name: 'Profile',
@@ -34,6 +40,7 @@ const upsertProfile = mutationField('upsertProfile', {
     return profile
   },
 })
+
 
 export const ProfileTypes = {
   Profile,

@@ -1,4 +1,10 @@
-import { inputObjectType, mutationField, objectType, queryField } from 'nexus'
+import {
+  inputObjectType,
+  mutationField,
+  objectType,
+  queryField,
+  list,
+} from 'nexus'
 import { hash, verify } from 'argon2'
 import { sign } from 'jsonwebtoken'
 
@@ -8,6 +14,7 @@ const User = objectType({
     t.model.id()
     t.model.name()
     t.model.email()
+    t.model.isSpeaker()
     t.model.profile()
   },
 })
@@ -19,6 +26,7 @@ const createUserInput = inputObjectType({
     t.nonNull.string('email')
     t.nonNull.string('password')
     t.nonNull.string('password2')
+    t.boolean('isSpeaker')
   },
 })
 
@@ -26,7 +34,7 @@ const createUser = mutationField('createUser', {
   type: 'User',
   args: { input: createUserInput },
   resolve: async (parent, { input }, { prisma }, info) => {
-    const { name, email, password, password2 } = input
+    const { name, email, password, password2, isSpeaker = false } = input
 
     if (password !== password2) throw new Error('Passwords do not match')
 
@@ -37,6 +45,7 @@ const createUser = mutationField('createUser', {
         name,
         email,
         password: hashedPassword,
+        isSpeaker,
       },
     })
     return newUser
@@ -90,9 +99,22 @@ const me = queryField('me', {
   },
 })
 
+const getAllSpeakers = queryField('getAllSpeakers', {
+  type: list(User),
+  resolve: async (parent, args, { prisma }, info) => {
+    const speakers = await prisma.user.findMany({
+      where: {
+        isSpeaker: { equals: true },
+      },
+    })
+    return speakers
+  },
+})
+
 export const UserTypes = {
   User,
   createUser,
   login,
   me,
+  getAllSpeakers,
 }

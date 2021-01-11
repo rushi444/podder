@@ -46,6 +46,7 @@ var User = nexus_1.objectType({
         t.model.id();
         t.model.name();
         t.model.email();
+        t.model.isSpeaker();
         t.model.profile();
     },
 });
@@ -56,6 +57,7 @@ var createUserInput = nexus_1.inputObjectType({
         t.nonNull.string('email');
         t.nonNull.string('password');
         t.nonNull.string('password2');
+        t.boolean('isSpeaker');
     },
 });
 var createUser = nexus_1.mutationField('createUser', {
@@ -65,25 +67,26 @@ var createUser = nexus_1.mutationField('createUser', {
         var input = _a.input;
         var prisma = _b.prisma;
         return __awaiter(void 0, void 0, void 0, function () {
-            var name, email, password, password2, hashedPassword, newUser;
-            return __generator(this, function (_c) {
-                switch (_c.label) {
+            var name, email, password, password2, _c, isSpeaker, hashedPassword, newUser;
+            return __generator(this, function (_d) {
+                switch (_d.label) {
                     case 0:
-                        name = input.name, email = input.email, password = input.password, password2 = input.password2;
+                        name = input.name, email = input.email, password = input.password, password2 = input.password2, _c = input.isSpeaker, isSpeaker = _c === void 0 ? false : _c;
                         if (password !== password2)
                             throw new Error('Passwords do not match');
                         return [4 /*yield*/, argon2_1.hash(password)];
                     case 1:
-                        hashedPassword = _c.sent();
+                        hashedPassword = _d.sent();
                         return [4 /*yield*/, prisma.user.create({
                                 data: {
                                     name: name,
                                     email: email,
                                     password: hashedPassword,
+                                    isSpeaker: isSpeaker,
                                 },
                             })];
                     case 2:
-                        newUser = _c.sent();
+                        newUser = _d.sent();
                         return [2 /*return*/, newUser];
                 }
             });
@@ -153,9 +156,31 @@ var me = nexus_1.queryField('me', {
         });
     },
 });
+var getAllSpeakers = nexus_1.queryField('getAllSpeakers', {
+    type: nexus_1.list('User'),
+    resolve: function (parent, args, _a, info) {
+        var prisma = _a.prisma;
+        return __awaiter(void 0, void 0, void 0, function () {
+            var speakers;
+            return __generator(this, function (_b) {
+                switch (_b.label) {
+                    case 0: return [4 /*yield*/, prisma.user.findMany({
+                            where: {
+                                isSpeaker: { equals: true },
+                            },
+                        })];
+                    case 1:
+                        speakers = _b.sent();
+                        return [2 /*return*/, speakers];
+                }
+            });
+        });
+    },
+});
 exports.UserTypes = {
     User: User,
     createUser: createUser,
     login: login,
     me: me,
+    getAllSpeakers: getAllSpeakers,
 };
