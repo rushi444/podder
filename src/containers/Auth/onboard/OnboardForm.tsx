@@ -15,7 +15,6 @@ export const OnboardForm = () => {
     mode: 'onSubmit',
     defaultValues: {
       bio: '',
-      isSpeaker: false,
     },
   })
 
@@ -47,11 +46,6 @@ export const OnboardForm = () => {
         name="bio"
         label="Intoduce yourself..."
         control={control}
-      />
-      <CheckBoxField
-        name="isSpeaker"
-        ref={register}
-        label="I'd like to be a podcast guest"
       />
       <Button mr=".5rem" onClick={() => history.push('/dashboard')}>
         Save for later

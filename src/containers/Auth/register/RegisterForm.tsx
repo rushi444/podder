@@ -12,12 +12,13 @@ import {
 } from './formHelpers'
 import { CREATE_USER } from '../../../graphql/mutations'
 import { useAuthData } from '../../../hooks/useAuthData'
+import { CheckBoxField } from '../../../components/fields/CheckBoxField'
 
 export const RegisterForm = () => {
   const { setUserData } = useAuthData()
   const history = useHistory()
 
-  const { handleSubmit, control, watch } = useForm({
+  const { handleSubmit, control, watch, register } = useForm({
     mode: 'onChange',
     defaultValues: registerDefaultValues,
   })
@@ -25,7 +26,7 @@ export const RegisterForm = () => {
   const [createUser, { loading }] = useMutation(CREATE_USER, {
     onCompleted: data => {
       history.push('/onboard')
-      setUserData(data.login.user)
+      setUserData(data?.createUser?.user)
     },
   })
 
@@ -65,6 +66,11 @@ export const RegisterForm = () => {
           ...registerRules.password2,
           validate: isPasswordMatch(pwd),
         }}
+      />
+      <CheckBoxField
+        name="isSpeaker"
+        ref={register}
+        label="I'd like to be a podcast guest"
       />
       <Button
         type="submit"

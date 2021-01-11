@@ -6,6 +6,7 @@ export const registerDefaultValues = {
   email: '',
   password: '',
   password2: '',
+  isSpeaker: false,
 }
 
 /**
