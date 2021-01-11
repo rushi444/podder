@@ -14,7 +14,6 @@ ReactDOM.render(
         <App />
       </ChakraProvider>
     </ApolloProvider>
-  </React.StrictMode>
-  ,
+  </React.StrictMode>,
   document.getElementById('root')
 )
