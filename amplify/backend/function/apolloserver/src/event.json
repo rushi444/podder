@@ -1,9 +1,0 @@
-{
-  "httpMethod": "POST",
-  "path": "/graphql",
-  "resource": "/graphql",
-  "headers": {
-    "Content-Type": "application/json"
-  },
-  "body": "{\"query\":\"query {\\n    hello\\n}\",\"variables\":{}}"
-}
