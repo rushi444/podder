@@ -6,7 +6,7 @@
   "author": "rushi444",
   "license": "MIT",
   "scripts": {
-    "start": "node dist/server",
+    "start": "node dist/index",
     "clean": "rm -rf dist",
     "build": "yarn run clean && yarn run generate && tsc",
     "generate": "yarn run generate:prisma && yarn run generate:nexus",
