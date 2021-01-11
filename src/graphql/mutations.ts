@@ -47,6 +47,7 @@ export const CREATE_PODCAST = gql`
       info
       imageUrl
       owner {
+        id
         name
         email
         profile {

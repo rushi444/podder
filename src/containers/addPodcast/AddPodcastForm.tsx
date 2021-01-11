@@ -1,11 +1,12 @@
-import React, { useState } from 'react'
+import React, { useCallback, useState } from 'react'
 import { useHistory } from 'react-router-dom'
 import { useForm } from 'react-hook-form'
 import { useMutation } from '@apollo/client'
+import { Button } from '@chakra-ui/react'
+
 import { CREATE_PODCAST } from '../../graphql/mutations'
 import { InputField } from '../../components/fields/InputField'
 import { ImageUploadField } from '../../components/fields/ImageUploadField'
-import { Button } from '@chakra-ui/react'
 import { CategorySelectField } from '../../components/fields/CategorySelectField'
 import { useSelectedCategories } from '../../hooks/useSelectedCategories'
 
@@ -15,7 +16,7 @@ export const AddPodcastForm = () => {
     selected: selectedCategories,
     clearSelected,
   } = useSelectedCategories()
-  
+
   const { handleSubmit, control } = useForm({
     mode: 'onChange',
     defaultValues: {
@@ -31,16 +32,16 @@ export const AddPodcastForm = () => {
     onCompleted: () => {
       clearSelected()
       history.push('/podcasts')
-    },
+    }
   })
 
-  const onSubmit = (formValues: FormValues) => {
+  const onSubmit = useCallback((formValues: FormValues) => {
     createPodcast({
       variables: {
         input: { ...formValues, imageUrl, categories: selectedCategories },
       },
     })
-  }
+  }, [createPodcast, selectedCategories])
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>

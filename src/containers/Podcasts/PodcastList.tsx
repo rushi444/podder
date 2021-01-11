@@ -15,6 +15,7 @@ export const PodcastList = () => {
 
   const { data, loading, error, refetch } = useQuery(SEARCH_PODCASTS, {
     variables: { input: { searchQuery: '' } },
+    fetchPolicy: 'cache-and-network',
   })
 
   if (loading) return <LoadingSpinner />

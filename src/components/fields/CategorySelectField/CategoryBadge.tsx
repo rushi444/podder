@@ -22,8 +22,8 @@ export const CategoryBadge = ({ category }: Props) => {
       colorScheme={selected.includes(category.name) ? 'teal' : 'initial'}
       variant="outline"
       p="5px"
-      m='.3rem 0'
-      borderRadius='11%'
+      m=".3rem 0"
+      borderRadius="11%"
       onClick={toggleSelect}
     >
       {category.name}
