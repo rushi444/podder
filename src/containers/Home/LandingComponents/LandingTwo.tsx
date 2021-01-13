@@ -8,7 +8,7 @@ import AudioConversation from '../../../assets/undraw_audio_conversation.svg'
 export const LandingTwo = () => {
   return (
     <LandingTwoContainer direction={{ base: 'column', md: 'row' }}>
-      <Box mr={{base: 'none', md: '1rem'}}>
+      <Box mr={{ base: 'none', md: '1rem' }}>
         <LandingTwoImg src={Podcast} alt="podcast host" />
         <Heading pb="1.5rem">For Hosts</Heading>
         <p style={{ paddingBottom: '1.5rem' }}>

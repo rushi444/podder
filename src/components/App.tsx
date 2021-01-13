@@ -21,7 +21,7 @@ export const App = () => {
           <Route exact path="/onboard" component={Onboard} />
           <Route exact path="/dashboard" component={Dashboard} />
           <Route exact path="/podcasts" component={Podcasts} />
-          <Route exact path='/addPodcast' component={AddPodcast} />
+          <Route exact path="/addPodcast" component={AddPodcast} />
         </Switch>
       </Layout>
     </Router>

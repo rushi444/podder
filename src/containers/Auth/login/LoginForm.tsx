@@ -30,29 +30,29 @@ export const LoginForm = () => {
   }
 
   return (
-      <form onSubmit={handleSubmit(onSubmit)}>
-        <InputField
-          name="email"
-          label="Email"
-          control={control}
-          rules={loginRules.email}
-        />
-        <InputField
-          name="password"
-          label="Password"
-          type="password"
-          control={control}
-          rules={loginRules.password}
-        />
-        <Button
-          type="submit"
-          isLoading={loading}
-          loadingText="Submitting"
-          colorScheme="teal"
-        >
-          Login
-        </Button>
-      </form>
+    <form onSubmit={handleSubmit(onSubmit)}>
+      <InputField
+        name="email"
+        label="Email"
+        control={control}
+        rules={loginRules.email}
+      />
+      <InputField
+        name="password"
+        label="Password"
+        type="password"
+        control={control}
+        rules={loginRules.password}
+      />
+      <Button
+        type="submit"
+        isLoading={loading}
+        loadingText="Submitting"
+        colorScheme="teal"
+      >
+        Login
+      </Button>
+    </form>
   )
 }
 

@@ -24,7 +24,7 @@ export const InputField = (props: Props) => {
   const { field, meta } = useController(props)
   const { errorMessage, hasError } = useMetaError(meta)
   return (
-    <Box m='3% 0'>
+    <Box m="3% 0">
       <FormControl isInvalid={hasError}>
         <FormLabel>{label}</FormLabel>
         <Input {...field} type={type} />

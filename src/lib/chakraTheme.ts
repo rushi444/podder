@@ -6,8 +6,6 @@ const colors = {
   },
 }
 
-const Button = {
-  
-}
+const Button = {}
 
 export const theme = extendTheme({ colors })

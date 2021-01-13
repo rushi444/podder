@@ -32,16 +32,19 @@ export const AddPodcastForm = () => {
     onCompleted: () => {
       clearSelected()
       history.push('/podcasts')
-    }
+    },
   })
 
-  const onSubmit = useCallback((formValues: FormValues) => {
-    createPodcast({
-      variables: {
-        input: { ...formValues, imageUrl, categories: selectedCategories },
-      },
-    })
-  }, [createPodcast, selectedCategories])
+  const onSubmit = useCallback(
+    (formValues: FormValues) => {
+      createPodcast({
+        variables: {
+          input: { ...formValues, imageUrl, categories: selectedCategories },
+        },
+      })
+    },
+    [createPodcast, selectedCategories]
+  )
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>

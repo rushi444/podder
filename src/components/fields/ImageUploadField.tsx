@@ -10,21 +10,24 @@ type Props = {
 }
 
 export const ImageUploadField = ({ setImageUrl, label }: Props) => {
-  const onDrop = useCallback(async acceptedFiles => {
-    try {
-      const data = new FormData()
-      data.append('file', acceptedFiles[0])
-      data.append('resource_type', 'raw')
-      data.append('upload_preset', 'podder')
-      const res = await axios.post(
-        'https://api.cloudinary.com/v1_1/rushi44/raw/upload',
-        data
-      )
-      setImageUrl(res.data.url)
-    } catch (err) {
-      console.error('Error uploading file...', err)
-    }
-  }, [setImageUrl])
+  const onDrop = useCallback(
+    async acceptedFiles => {
+      try {
+        const data = new FormData()
+        data.append('file', acceptedFiles[0])
+        data.append('resource_type', 'raw')
+        data.append('upload_preset', 'podder')
+        const res = await axios.post(
+          'https://api.cloudinary.com/v1_1/rushi44/raw/upload',
+          data
+        )
+        setImageUrl(res.data.url)
+      } catch (err) {
+        console.error('Error uploading file...', err)
+      }
+    },
+    [setImageUrl]
+  )
 
   const { isDragActive, getRootProps, getInputProps } = useDropzone({
     onDrop,

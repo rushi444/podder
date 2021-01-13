@@ -15,7 +15,8 @@
     "dev": "ts-node-dev --no-notify --respawn --transpile-only src/index.ts",
     "migrate": "yarn db:save && yarn db:migrate",
     "db:save": "yarn prisma migrate dev --create-only --preview-feature",
-    "db:migrate": "yarn prisma migrate dev --preview-feature"
+    "db:migrate": "yarn prisma migrate dev --preview-feature",
+    "db:push": "yarn prisma db push --preview-feature"
   },
   "devDependencies": {
     "@prisma/cli": "^2.14.0",
