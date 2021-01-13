@@ -9,7 +9,14 @@ export const schema = makeSchema({
   plugins: [
     nexusPrisma({
       experimentalCRUD: true,
-      shouldGenerateArtifacts: process.env.NODE_ENV === 'development',
+      outputs: {
+        typegen: join(
+          process.cwd(),
+          'src',
+          'generated',
+          'typegen-nexus-plugin-prisma.d.ts'
+        ),
+      },
     }),
   ],
   outputs: {
