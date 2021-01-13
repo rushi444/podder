@@ -8,7 +8,7 @@
   "scripts": {
     "start": "node dist/index",
     "clean": "rm -rf dist",
-    "build": "yarn run clean && yarn run generate && tsc",
+    "build": "yarn run clean && tsc",
     "generate": "yarn run generate:prisma && yarn run generate:nexus",
     "generate:prisma": "prisma generate",
     "generate:nexus": "ts-node --transpile-only src/schema",
