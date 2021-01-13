@@ -1,12 +1,19 @@
+  
 {
   "compilerOptions": {
-    "target": "es5",
-    "noImplicitAny": false,
-    "allowJs": true,
+    "sourceMap": true,
+    "module": "commonjs",
+    "target": "ES2018",
+    "outDir": "dist",
+    "lib": ["esnext", "dom"],
+    "noImplicitAny": true,
+    "noImplicitThis": true,
+    "alwaysStrict": true,
+    "strictBindCallApply": true,
+    "strictFunctionTypes": true,
     "esModuleInterop": true,
     "skipLibCheck": true,
-    "outDir": "dist"
+    "noUnusedParameters": false
   },
-  "include": ["."],
-  "exclude": ["node_modules"]
+  "include": ["./src"]
 }

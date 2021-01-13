@@ -2,7 +2,7 @@
   "name": "podder-server",
   "version": "1.0.0",
   "description": "GraphQL Server for Podder App",
-  "main": "index.ts",
+  "main": "src/index.ts",
   "author": "rushi444",
   "license": "MIT",
   "scripts": {
@@ -12,7 +12,7 @@
     "generate": "yarn run generate:prisma && yarn run generate:nexus",
     "generate:prisma": "prisma generate",
     "generate:nexus": "ts-node --transpile-only src/schema",
-    "dev": "ts-node-dev --no-notify --respawn --transpile-only index.ts",
+    "dev": "ts-node-dev --no-notify --respawn --transpile-only src/index.ts",
     "migrate": "yarn db:save && yarn db:migrate",
     "db:save": "yarn prisma migrate dev --create-only --preview-feature",
     "db:migrate": "yarn prisma migrate dev --preview-feature"
