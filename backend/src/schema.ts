@@ -11,9 +11,8 @@ export const schema = makeSchema({
       experimentalCRUD: true,
       outputs: {
         typegen: join(
-          process.cwd(),
-          'src',
-          'generated',
+          __dirname,
+          'generated/',
           'typegen-nexus-plugin-prisma.d.ts'
         ),
       },
